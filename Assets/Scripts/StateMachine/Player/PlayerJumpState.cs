@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerJumpState : PlayerBaseState
 
 {
+  
+    private readonly int JumpHash = Animator.StringToHash("Jumping"); 
+    
+    private const float CrossFadeDuration = 0.1f;
+
 
     public PlayerJumpState(PlayerStateMachine stateMachine): base (stateMachine){
           isRootState = true;
     }
     public override void Enter()
     {
-     
+      stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossFadeDuration);
      stateMachine.InputReader.JumpEvent += OnDumbleJump;
      Jump();
     }  

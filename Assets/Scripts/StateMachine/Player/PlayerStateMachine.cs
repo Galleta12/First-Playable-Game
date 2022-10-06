@@ -43,9 +43,9 @@ public float intialJumpVelocity {get; private set; }
 
 private float groundGravity = -.05f;
 
-private float maxJumpHeight = 1.0f;
+private float maxJumpHeight = 1.2f;
 
-private float maxJumpTime = 0.5f;
+private float maxJumpTime = 0.7f;
 
 public Vector3 Movement =>  (Vector3.up * verticalVelocity);
 

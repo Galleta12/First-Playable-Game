@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerFallState : PlayerBaseState
 {
+    
+    
+    private readonly int FallHash = Animator.StringToHash("FallIdle");
+    private readonly int LandHash = Animator.StringToHash("Land");  
+    
+    private const float CrossFadeDuration = 0.1f;
+    
+    
+    
     public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         isRootState = true;
@@ -12,6 +21,7 @@ public class PlayerFallState : PlayerBaseState
     public override void Enter()
     {
          stateMachine.InputReader.JumpEvent += OnDumbleJump;
+         stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossFadeDuration);
     }
 
 
@@ -30,6 +40,7 @@ public class PlayerFallState : PlayerBaseState
 
         FaceLookMouse(stateMachine.currentMovement,deltaTime);
         if(stateMachine.Controller.isGrounded){
+             stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));
         }
       
