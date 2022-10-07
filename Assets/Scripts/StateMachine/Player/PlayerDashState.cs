@@ -6,10 +6,19 @@ using UnityEngine;
 public class PlayerDashState : PlayerBaseState
 {
     
+  private readonly int DashGroundHash = Animator.StringToHash("DashGround");
+  private readonly int DashAirHash = Animator.StringToHash("DashAir");
+  private const float CrossFadeDuration = 0.1f;
+
+
+
+
     private Vector3 MovementDash;
 
 
     private float remainingDashtTime;
+
+  
 
     
     
@@ -32,8 +41,11 @@ public class PlayerDashState : PlayerBaseState
        stateMachine.InputReader.DashEvent -= stateMachine.OnDash;
       
        remainingDashtTime = stateMachine.DashTime;
-     
       
+
+     
+     
+    
     }
 
     
@@ -43,7 +55,7 @@ public class PlayerDashState : PlayerBaseState
       
       stateMachine.currentMovement =  this.MovementDash * stateMachine.DashForce / stateMachine.DashTime;
       FaceLookMouse(MovementDash, deltaTime);
-     
+     UpdateAnimator();
      
      if(!stateMachine.Controller.isGrounded){
        stateMachine.moveDelegate -= stateMachine.Move;
@@ -80,6 +92,10 @@ public class PlayerDashState : PlayerBaseState
        
         stateMachine.InputReader.DashEvent += stateMachine.OnDash;
         stateMachine.moveDelegate = stateMachine.Move;
+        
+        stateMachine.coolDownTime = stateMachine.DashCoolDown;
+        stateMachine.setCoolDown = handleCoolDown;
+        
 
     }
 
@@ -98,6 +114,17 @@ public class PlayerDashState : PlayerBaseState
         return camera_z;
 
        
+    }
+
+
+    private void UpdateAnimator(){
+     if(stateMachine.Controller.isGrounded){
+      stateMachine.Animator.CrossFadeInFixedTime(DashGroundHash,CrossFadeDuration);
+     }else{
+      stateMachine.Animator.CrossFadeInFixedTime(DashAirHash,CrossFadeDuration);
+     }
+
+
     }
 
 

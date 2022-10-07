@@ -27,7 +27,17 @@ public class PlayerStateMachine : StateMachine
 
 [field: SerializeField] public float DashTime {get; private set; }
 
-[field: SerializeField] public float DashCoolDown {get; private set; }
+[field: SerializeField] public float DashCoolDown {get;set; }
+
+[field: SerializeField] public float RollForce {get; private set; }
+
+
+[field: SerializeField] public float RollStationaryForce {get; private set; }
+
+
+[field: SerializeField] public float RollTime {get; private set; }
+
+[field: SerializeField] public float RoolCoolDown {get;set; }
 
 
 
@@ -37,6 +47,7 @@ public Transform MainCameraPlayer {get; private set; }
 
 [HideInInspector]
 public Vector3 currentMovement;
+[HideInInspector]
 public float verticalVelocity;
 public float gravity {get; private set; } = -9.8f;
 public float intialJumpVelocity {get; private set; }
@@ -53,6 +64,14 @@ public Vector3 Movement =>  (Vector3.up * verticalVelocity);
 public delegate void MoveDelegate(Vector3 motion, float deltaTime);
 
 public MoveDelegate moveDelegate;
+
+
+public delegate void SetCoolDown(float deltaTime);
+
+public SetCoolDown setCoolDown;
+
+
+public float coolDownTime {get; set; }
 
 
 private void Start() {
@@ -75,6 +94,7 @@ public override void CustomUpdate(float deltaTime){
   
   moveDelegate?.Invoke(currentMovement,deltaTime);
   handleGravity(deltaTime);
+  setCoolDown?.Invoke(deltaTime);
   
 }
 
@@ -92,7 +112,7 @@ private void handleGravity(float deltaTime)
 
 public void Move(Vector3 motion, float deltaTime){
  
-      Debug.Log("This is the normal move");
+   
       Controller.Move((motion + Movement) * deltaTime);
  
 }
@@ -110,12 +130,10 @@ private void setupJumpVariable()
 
 
 public void OnDash(){
-    SwitchState(new PlayerDashState(this,this.currentMovement));
+    if(coolDownTime <= 0f){
+       SwitchState(new PlayerDashState(this,this.currentMovement));
+    }
+    
 }
-
-
-
-
-
 
 }

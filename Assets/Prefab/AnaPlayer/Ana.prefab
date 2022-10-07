@@ -6509,6 +6509,89 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.069979966, y: -0.55961084, z: -0.03351187}
     m_Extent: {x: 0.07608305, y: 0.036215693, z: 0.07560689}
   m_DirtyAABB: 0
+--- !u!1 &5557622743298477186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9054306562650075988}
+  - component: {fileID: 1942685619077531015}
+  - component: {fileID: 6655938342806312996}
+  m_Layer: 0
+  m_Name: MagicSword_Ice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9054306562650075988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557622743298477186}
+  m_LocalRotation: {x: 0.6835173, y: 0.14661372, z: 0.14303757, w: 0.70060605}
+  m_LocalPosition: {x: 0.02, y: 0.1935, z: -0.201}
+  m_LocalScale: {x: 0.25496703, y: 0.25496703, z: 0.25496703}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 420947197600351848}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 66.321, y: 86.772, z: 86.476}
+--- !u!33 &1942685619077531015
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557622743298477186}
+  m_Mesh: {fileID: 4300000, guid: c8934126fd9131249a579eeadd5f60a5, type: 3}
+--- !u!23 &6655938342806312996
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557622743298477186}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 4294967295
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 5b0be96218e756142a2e34319dbed986, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5589121873481639157
 GameObject:
   m_ObjectHideFlags: 0
@@ -6664,7 +6747,8 @@ Transform:
   m_LocalPosition: {x: -0.05670927, y: 0.0627316, z: 0.03040479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9054306562650075988}
   m_Father: {fileID: 5037727408655237761}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7328,6 +7412,14 @@ MonoBehaviour:
   <FreeLookMovementSpeed>k__BackingField: 6
   <JumpMoveSpeed>k__BackingField: 4
   <RotationDampSpeed>k__BackingField: 10
+  <DashForce>k__BackingField: 1
+  <DashStationaryForce>k__BackingField: 4
+  <DashTime>k__BackingField: 0.2
+  <DashCoolDown>k__BackingField: 0
+  <RollForce>k__BackingField: 0
+  <RollStationaryForce>k__BackingField: 0
+  <RollTime>k__BackingField: 0
+  <RoolCoolDown>k__BackingField: 0
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
 --- !u!114 &8789574366895803581

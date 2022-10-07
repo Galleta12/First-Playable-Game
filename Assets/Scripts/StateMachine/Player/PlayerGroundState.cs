@@ -23,8 +23,12 @@ public class PlayerGroundState : PlayerBaseState
     
     public override void Enter()
     {
+       
+    
        stateMachine.Animator.CrossFadeInFixedTime(NormalStateBlendHash, CrossFadeDuration);
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.RollEvent += OnRoll;
+        stateMachine.InputReader.DrawEvent += OnDraw;
         
     }
 
@@ -64,6 +68,8 @@ public class PlayerGroundState : PlayerBaseState
     public override void Exit()
     {
        stateMachine.InputReader.JumpEvent -= OnJump;
+       stateMachine.InputReader.RollEvent -= OnRoll;
+        stateMachine.InputReader.DrawEvent -= OnDraw;
       
     }
 
@@ -77,6 +83,14 @@ public class PlayerGroundState : PlayerBaseState
 
      private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+    }
+
+   private void OnRoll(){
+        
+        if(stateMachine.coolDownTime <=0f){
+          stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
+        }
+      
     }
 
 

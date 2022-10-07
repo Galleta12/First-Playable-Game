@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerDoubleJumpState : PlayerBaseState
 {
+    
+    
+    private readonly int DoubleJumpHash = Animator.StringToHash("DoubleJump");
+    private const float CrossFadeDuration = 0.1f;
+    
+    
     public PlayerDoubleJumpState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         isRootState = true;
@@ -12,6 +18,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
     public override void Enter()
     {
         DoubleJump();
+        stateMachine.Animator.CrossFadeInFixedTime(DoubleJumpHash,CrossFadeDuration);
     }
 
 

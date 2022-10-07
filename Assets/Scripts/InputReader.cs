@@ -11,16 +11,21 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
     private Controls controls;
 
-     public Vector2 MovementValue {get; private set;}
+    public Vector2 MovementValue {get; private set;}
+
+    public  String DrawNameKeyboard {get; private set;}
 
 
-      public bool  isJumping {get; private set;}
+    public bool  isJumping {get; private set;}
 
 
-       public event Action JumpEvent;
+    public event Action JumpEvent;
 
 
-        public event Action DashEvent;
+    public event Action DashEvent;
+     public event Action RollEvent;
+
+       public event Action DrawEvent;
 
 
 
@@ -57,5 +62,19 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
         if(!context.performed){return;}
         DashEvent?.Invoke();
+    }
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+       if(!context.performed){return;}
+       RollEvent?.Invoke();
+    }
+
+    public void OnDrawWeapon(InputAction.CallbackContext context)
+    {
+       if(!context.performed){return;}
+       
+       DrawNameKeyboard =context.control.name;
+       DrawEvent?.Invoke();
     }
 }

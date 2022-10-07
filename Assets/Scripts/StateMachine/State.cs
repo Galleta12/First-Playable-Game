@@ -34,6 +34,21 @@ protected float GetNormalizedTime(Animator animator){
         }
 }
 
+protected float GetNormalizedTimeNormalAnimation(Animator animator){
+
+  AnimatorStateInfo currentAnimator = animator.GetCurrentAnimatorStateInfo(0);
+  AnimatorStateInfo nextAnimator = animator.GetNextAnimatorStateInfo(0);
+
+
+    if(animator.IsInTransition(0) && nextAnimator.IsTag("Attack")){
+            return nextAnimator.normalizedTime;
+        }else if(!animator.IsInTransition(0) && currentAnimator.IsTag("Attack")){
+            return currentAnimator.normalizedTime;
+        }else{
+            return 0f;
+        }
+}
+
 public void SetSuperState(State newSuperState){
  this.currentSuperState = newSuperState;
 }

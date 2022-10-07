@@ -90,6 +90,20 @@ protected void FaceLookMouse( Vector3 direction,float deltaTime){
 }
 
 
+protected void handleCoolDown(float deltaTime){
+  stateMachine.coolDownTime -= deltaTime;
+  if(stateMachine.coolDownTime <0f){
+    stateMachine.setCoolDown -= handleCoolDown;
+  }
+
+}
+
+
+protected void OnDraw(){
+  stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine));
+}
+
+
 
 
 
