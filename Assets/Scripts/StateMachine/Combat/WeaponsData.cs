@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// this the the data of the weapon and the animation
 [Serializable]
 public struct WeaponsData 
 {
   
   [field: SerializeField] public string WeaponName {get; private set;}
+
+  [field: SerializeField] public string WeaponAnimationDrawName {get; private set;}
   [field: SerializeField] public GameObject WeaponObject {get; private set;}
 
   [field: SerializeField] public float ForceWeaponTime {get; private set;} 

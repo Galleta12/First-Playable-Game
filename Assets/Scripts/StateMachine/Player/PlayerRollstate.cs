@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerRollstate : PlayerBaseState
 {
-    
+    // this is the roll state is similar to the dash with slightly difference
+    // the first difference is that roll only occur on the ground state
     private readonly int RollHash = Animator.StringToHash("Roll");
     private const float CrossFadeDuration = 0.1f;
 
@@ -34,7 +35,7 @@ public class PlayerRollstate : PlayerBaseState
      public override void Tick(float deltaTime)
     {
         
-        Debug.Log("Wtfff");
+       
         stateMachine.currentMovement = this.RollInput * stateMachine.RollForce / stateMachine.RollTime;
         FaceLookMouse(this.RollInput, deltaTime);
        
@@ -52,8 +53,8 @@ public class PlayerRollstate : PlayerBaseState
     {
        
     
-    stateMachine.coolDownTime = stateMachine.RoolCoolDown;
-    stateMachine.setCoolDown = handleCoolDown;
+    stateMachine.coolDownTimeRoll = stateMachine.RoolCoolDown;
+    stateMachine.setCoolDown += handleCoolDownRoll;
     }
 
     public override void IntiliazeSubState()

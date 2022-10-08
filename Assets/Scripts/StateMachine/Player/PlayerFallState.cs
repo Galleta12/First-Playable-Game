@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerFallState : PlayerBaseState
 {
     
-    
+    // variables for the fall
+    // land animator need to be checked.
     private readonly int FallHash = Animator.StringToHash("FallIdle");
     private readonly int LandHash = Animator.StringToHash("Land");  
     
@@ -27,18 +28,19 @@ public class PlayerFallState : PlayerBaseState
 
      public override void Tick(float deltaTime)
     {
-    
+    // for debuggin
     Debug.Log("This is fall");
-       
+    // we call this method
        Fall(deltaTime);
       
-         
+      // set the inputs   
       stateMachine.currentMovement.x = CalculateNormalMovement().x;
         stateMachine.currentMovement.z = CalculateNormalMovement().z;
 
                 stateMachine.currentMovement = stateMachine.currentMovement * stateMachine.JumpMoveSpeed;
 
         FaceLookMouse(stateMachine.currentMovement,deltaTime);
+        // change state and need to be checked the animations
         if(stateMachine.Controller.isGrounded){
              stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));
@@ -55,7 +57,7 @@ public class PlayerFallState : PlayerBaseState
     {
         
     }
-
+   // we want to fall faster once we jump
     private void Fall(float deltaTime){
         float fallMultiplier = 2.0f;
 

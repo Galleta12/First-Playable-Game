@@ -123,42 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &228621938 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5557622743298477186, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-  m_PrefabInstance: {fileID: 742301676}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &349972804 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6075963298249893444, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-  m_PrefabInstance: {fileID: 742301676}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &349972806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349972804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f532f4afd5d8b49bc9ef4daaae2dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <WeaponsData>k__BackingField:
-  - <WeaponName>k__BackingField: Sword
-    <WeaponObject>k__BackingField: {fileID: 228621938}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 4
-    <Damage>k__BackingField: 4
-    <Knockback>k__BackingField: 4
-  - <WeaponName>k__BackingField: Bow
-    <WeaponObject>k__BackingField: {fileID: 7967725143127380694}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 4
-    <Damage>k__BackingField: 4
-    <Knockback>k__BackingField: 4
-  <Hand>k__BackingField: {fileID: 1862226594}
 --- !u!1 &453363768
 GameObject:
   m_ObjectHideFlags: 3
@@ -228,7 +192,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453363768}
-  m_LocalRotation: {x: 0.52019954, y: 0.0016783248, z: -0.001022272, w: 0.85404253}
+  m_LocalRotation: {x: 0.52019954, y: 0.0016783249, z: -0.0010222722, w: 0.85404253}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -661,10 +625,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1784403933353602762, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-      propertyPath: <Weapon>k__BackingField
-      value: 
-      objectReference: {fileID: 349972806}
     - target: {fileID: 1784403933353602762, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
       propertyPath: <RollTime>k__BackingField
       value: 0.5
@@ -1165,10 +1125,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.632872
       objectReference: {fileID: 0}
-    - target: {fileID: 8789574366895803581, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9041025425433500308, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.21785468
@@ -1185,10 +1141,7 @@ PrefabInstance:
     - {fileID: 7573176073428652172, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6075963298249893444, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349972806}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
 --- !u!4 &979927484 stripped
 Transform:
@@ -1264,7 +1217,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007845867}
-  m_LocalRotation: {x: 0.5356075, y: 0.0016594869, z: -0.001052541, w: 0.8444648}
+  m_LocalRotation: {x: 0.5356075, y: 0.001659519, z: -0.0010525613, w: 0.8444648}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1680,7 +1633,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554302828}
-  m_LocalRotation: {x: 0.5508793, y: 0.001640119, z: -0.0010825862, w: 0.8345826}
+  m_LocalRotation: {x: 0.5508793, y: 0.0016400479, z: -0.0010825392, w: 0.8345826}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1775,7 +1728,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.55087924, y: 0.0016401192, z: -0.0010825865, w: 0.8345827}
+  m_LocalRotation: {x: 0.55087924, y: 0.0016400481, z: -0.0010825392, w: 0.8345827}
   m_LocalPosition: {x: -21.543459, y: 11.421, z: 389.674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2107,11 +2060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1862226594 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6393417760075563465, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-  m_PrefabInstance: {fileID: 742301676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1924550510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2709230532821811799, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
@@ -2340,8 +2288,3 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &7967725143127380694 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6928382324520662920, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
-  m_PrefabInstance: {fileID: 742301676}
-  m_PrefabAsset: {fileID: 0}

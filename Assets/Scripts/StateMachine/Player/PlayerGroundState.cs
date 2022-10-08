@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerGroundState : PlayerBaseState
 {
+   
+   // variables for the state
     private readonly int NormalStateBlendHash = Animator.StringToHash("NormalBlendTree"); 
     private readonly int NormalBlendSpeedHash = Animator.StringToHash("SpeedNormalBlend"); 
 
@@ -26,7 +28,9 @@ public class PlayerGroundState : PlayerBaseState
        
     
        stateMachine.Animator.CrossFadeInFixedTime(NormalStateBlendHash, CrossFadeDuration);
+        // suscribe to all the methods
         stateMachine.InputReader.JumpEvent += OnJump;
+        // you can only roll if you are grounded
         stateMachine.InputReader.RollEvent += OnRoll;
         stateMachine.InputReader.DrawEvent += OnDraw;
         
@@ -38,12 +42,14 @@ public class PlayerGroundState : PlayerBaseState
     {
 
      
-      
+      // get the current movements input
       Vector3 currentMove = CalculateNormalMovement();
       stateMachine.currentMovement.x = currentMove.x;
       stateMachine.currentMovement.z = currentMove.z;
 
+      // to the variable for the movement set it as the inputs and multiply it by the speed 
       stateMachine.currentMovement = stateMachine.currentMovement * stateMachine.FreeLookMovementSpeed;
+        // if the inputs are zero we want idle animation otherwise it will run
         if(stateMachine.InputReader.MovementValue == Vector2.zero){
          
              stateMachine.Animator.SetFloat(NormalBlendSpeedHash, 0 , AnimatorDampTime, deltaTime);
@@ -52,21 +58,20 @@ public class PlayerGroundState : PlayerBaseState
 
         stateMachine.Animator.SetFloat(NormalBlendSpeedHash, 1 , AnimatorDampTime, deltaTime);
 
+        // rotate the character depending on the inputs and the mouse 
         FaceLookMouse(stateMachine.currentMovement,deltaTime);
 
-       checkEnemy();
+       
 
       
        
     }
 
-    private void checkEnemy()
-    {
-       
-    }
+   
 
     public override void Exit()
     {
+       //unsubscribe of the events
        stateMachine.InputReader.JumpEvent -= OnJump;
        stateMachine.InputReader.RollEvent -= OnRoll;
         stateMachine.InputReader.DrawEvent -= OnDraw;
@@ -76,18 +81,18 @@ public class PlayerGroundState : PlayerBaseState
     public override void IntiliazeSubState()
     {
      
-       SetSubState(new PlayerWalkState(stateMachine));
+      
       
     }
 
-
+  // jump and roll event
      private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 
    private void OnRoll(){
         
-        if(stateMachine.coolDownTime <=0f){
+        if(stateMachine.coolDownTimeRoll <=0f){
           stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
         }
       
