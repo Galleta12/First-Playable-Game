@@ -13,8 +13,11 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
     public Vector2 MovementValue {get; private set;}
 
-    public  String DrawNameKeyboard {get; private set;}
+    private  String KeyBoardNumber;
 
+    public int KeyBoardNumberInt => Convert.ToInt32(KeyBoardNumber);
+   
+   public String DeviceName {get; private set;}
 
     public bool  isJumping {get; private set;}
 
@@ -74,7 +77,8 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
        if(!context.performed){return;}
        
-       DrawNameKeyboard =context.control.name;
+       KeyBoardNumber =context.control.name;
+       DeviceName =context.control.device.name;
        DrawEvent?.Invoke();
     }
 }

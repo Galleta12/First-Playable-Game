@@ -11,29 +11,44 @@ public class PlayerDrawWeapons : PlayerBaseState
     private GameObject hand;
 
     private GameObject sword;
+
+    private int KeyboardNumber;
+
+     private string DeviceName;
+
+     private WeaponsData currentWeapon;
     
-    public PlayerDrawWeapons(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerDrawWeapons(PlayerStateMachine stateMachine, int keyboardNumber, string deviceName) : base(stateMachine)
     {
-          isRootState = true;  
+          isRootState = true;
+          this.KeyboardNumber = keyboardNumber;
+          this.DeviceName = deviceName;
+          this.currentWeapon = stateMachine.Weapon.getTypeWeapon(keyboardNumber); 
     }
 
     public override void Enter()
     {
    
        stateMachine.Animator.CrossFadeInFixedTime(DrawSwordHash ,CrossFadeDuration);
-       hand = GameObject.Find("RightHand");
-       sword = GameObject.Find("MagicSword_Ice");
-       sword.transform.SetParent(hand.transform,false);
-       sword.transform.position = hand.transform.position;
+
+      //  hand = GameObject.Find("RightHand");
+      //  sword = GameObject.Find("MagicSword_Ice");
+      //  sword.transform.SetParent(hand.transform,false);
+      //  sword.transform.position = hand.transform.position;
       
+      //this is just for print the data and check that everything  is ok
+      // foreach(KeyValuePair<GameObject,WeaponsData> kvp in stateMachine.Weapon.WeapondsDataHash){
+            
+      //       Debug.Log("Key: " + kvp.Key + "," + "Value: " + kvp.Value.WeaponObject);
+      // }
       
     }
 
 
       public override void Tick(float deltaTime)
     {
-        Debug.Log( hand);
-        Debug.Log(sword);
+        //Debug.Log( stateMachine.Weapon.WeaponsDatas[0].WeaponObject);
+       
     }
 
     public override void Exit()

@@ -100,7 +100,9 @@ protected void handleCoolDown(float deltaTime){
 
 
 protected void OnDraw(){
-  stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine));
+  
+  
+  stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
 }
 
 
