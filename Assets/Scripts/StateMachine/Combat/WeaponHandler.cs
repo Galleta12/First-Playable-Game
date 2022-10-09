@@ -15,9 +15,8 @@ public class WeaponHandler : MonoBehaviour
 
 // this is for the inventory, it will return the game object depending on the number input
    public Dictionary<int,GameObject> WeaponsSelectionHash {get; set;} = new Dictionary<int, GameObject>();
-
-
-// get the weapon that you want to draw, otherwise just return an empyt hand
+//get the current weapon selected by the user
+private WeaponsData selectedWeapon;
  
  
  private void Start() {
@@ -32,6 +31,7 @@ public class WeaponHandler : MonoBehaviour
     public WeaponsData getTypeWeapon(int WeaponNumber){
    
       GameObject weaponSelected = WeaponsSelectionHash[WeaponNumber];
+      this.selectedWeapon = WeapondsDataHash[weaponSelected];
       return WeapondsDataHash[weaponSelected];
     
  }
@@ -55,11 +55,22 @@ public class WeaponHandler : MonoBehaviour
 
 
     
-    // this should be modified
+    // this should be modified for the inventory
     private void Selection(){
       this.WeaponsSelectionHash.Add(1,WeaponsDatas[0].WeaponObject);
        this.WeaponsSelectionHash.Add(2,WeaponsDatas[1].WeaponObject);
     }
+
+
+
+    
+    //events on the animation
+    public void DrawWeapon(){
+     this.selectedWeapon.WeaponObject.SetActive(true);
+    }
+
+
+    
 
 
 }

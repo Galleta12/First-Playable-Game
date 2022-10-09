@@ -19,6 +19,8 @@ public class PlayerJumpState : PlayerBaseState
       stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossFadeDuration);
      //subscribe to the double jump
      stateMachine.InputReader.JumpEvent += OnDumbleJump;
+
+      stateMachine.InputReader.DrawEvent += OnDraw;
      // call the jump method
      Jump();
     }  
@@ -46,6 +48,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnDumbleJump;
+         stateMachine.InputReader.DrawEvent -= OnDraw;
     }
 
     public override void IntiliazeSubState()

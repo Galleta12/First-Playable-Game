@@ -52,7 +52,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &-4310961504654375502
+--- !u!1102 &-7713770981050877523
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -60,7 +60,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DrawSword
-  m_Speed: 1
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -72,8 +72,8 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 50fdecabf2c73e9478a07c1c71f4cfe1, type: 2}
-  m_Tag: 
+  m_Motion: {fileID: 7400000, guid: f4f675bb4f018164a9a1a09c3946795f, type: 2}
+  m_Tag: DrawSword
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -301,8 +301,8 @@ AnimatorStateMachine:
     m_State: {fileID: 5487709685925096637}
     m_Position: {x: 320, y: 270, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -4310961504654375502}
-    m_Position: {x: 550, y: 110, z: 0}
+    m_State: {fileID: -7713770981050877523}
+    m_Position: {x: 550, y: 120, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

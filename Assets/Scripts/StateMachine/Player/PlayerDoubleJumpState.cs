@@ -17,7 +17,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
 
     public override void Enter()
     {
-        
+         stateMachine.InputReader.DrawEvent += OnDraw;
         stateMachine.Animator.CrossFadeInFixedTime(DoubleJumpHash,CrossFadeDuration);
         // call this method
         DoubleJump();
@@ -40,7 +40,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
 
     public override void Exit()
     {
-       
+        stateMachine.InputReader.DrawEvent -= OnDraw;
     }
 
     public override void IntiliazeSubState()

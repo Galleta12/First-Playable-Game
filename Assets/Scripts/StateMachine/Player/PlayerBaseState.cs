@@ -121,12 +121,28 @@ protected void handleCoolDownRoll(float deltaTime){
 
 protected void OnDraw(){
   
-  
-  stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
+  if(stateMachine.InputReader.MovementValue == Vector2.zero){
+     stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
+  }else{
+    stateMachine.SwitchState(new PlayerDrawMovement(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
+  }
+ 
 }
 
 
-
+protected bool GetStateOfAnimation(Animator animator, string animationName){
+   AnimatorStateInfo currentAnimation = animator.GetCurrentAnimatorStateInfo(0);
+    if(currentAnimation.normalizedTime > 1.0f && currentAnimation.IsTag(animationName)){
+      
+      Debug.Log("This is true");
+     return false;
+    }else{
+        Debug.Log("This is false");
+       return true;
+      
+      
+    }
+}
 
 
 

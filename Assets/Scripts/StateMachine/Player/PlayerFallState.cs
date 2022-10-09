@@ -22,6 +22,7 @@ public class PlayerFallState : PlayerBaseState
     public override void Enter()
     {
          stateMachine.InputReader.JumpEvent += OnDumbleJump;
+          stateMachine.InputReader.DrawEvent += OnDraw;
          stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossFadeDuration);
     }
 
@@ -51,6 +52,7 @@ public class PlayerFallState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnDumbleJump;
+         stateMachine.InputReader.DrawEvent -= OnDraw;
     }
 
     public override void IntiliazeSubState()

@@ -11,7 +11,9 @@ public struct WeaponsData
   [field: SerializeField] public string WeaponName {get; private set;}
 
   [field: SerializeField] public string WeaponAnimationDrawName {get; private set;}
-  [field: SerializeField] public GameObject WeaponObject {get; private set;}
+
+   [field: SerializeField] public string WeaponAnimationDrawNameMovement {get; private set;}
+  [field: SerializeField] public GameObject WeaponObject {get;private set;}
 
   [field: SerializeField] public float ForceWeaponTime {get; private set;} 
 

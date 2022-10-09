@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerDrawWeapons : PlayerBaseState
 {
+    // this should still need to be checked
+   
+    private readonly int NormalStateBlendHash = Animator.StringToHash("MaskBlendTree"); 
+    private readonly int NormalBlendSpeedHash = Animator.StringToHash("MaskSpeed"); 
+
+    private const float AnimatorDampTime = 0.1f;
+
+    private const float CrossFadeDuration = 0.1f;
     
-     private readonly int DrawSwordHash = Animator.StringToHash("DrawSword");
-     private const float CrossFadeDuration = 0.1f;
+   
+    
 
     private GameObject hand;
 
@@ -29,12 +38,13 @@ public class PlayerDrawWeapons : PlayerBaseState
     public override void Enter()
     {
    
-       stateMachine.Animator.CrossFadeInFixedTime(DrawSwordHash ,CrossFadeDuration);
+       
+     
+         stateMachine.Animator.CrossFadeInFixedTime(currentWeapon.WeaponAnimationDrawName ,CrossFadeDuration);
+         
+       
+    
 
-      //  hand = GameObject.Find("RightHand");
-      //  sword = GameObject.Find("MagicSword_Ice");
-      //  sword.transform.SetParent(hand.transform,false);
-      //  sword.transform.position = hand.transform.position;
       
       //this is just for print the data and check that everything  is ok
       // foreach(KeyValuePair<GameObject,WeaponsData> kvp in stateMachine.Weapon.WeapondsDataHash){
@@ -47,7 +57,14 @@ public class PlayerDrawWeapons : PlayerBaseState
 
       public override void Tick(float deltaTime)
     {
-        //Debug.Log( stateMachine.Weapon.WeaponsDatas[0].WeaponObject);
+    
+      
+      if(!GetStateOfAnimation(stateMachine.Animator,currentWeapon.WeaponAnimationDrawName)){
+         stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+      }
+
+      
+    
        
     }
 
@@ -60,6 +77,8 @@ public class PlayerDrawWeapons : PlayerBaseState
     {
       
     }
+
+
 
   
 }

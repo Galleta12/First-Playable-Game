@@ -7273,7 +7273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9054306562650075988
 Transform:
   m_ObjectHideFlags: 0
@@ -7281,14 +7281,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557622743298477186}
-  m_LocalRotation: {x: 0.6835173, y: 0.14661372, z: 0.14303757, w: 0.70060605}
-  m_LocalPosition: {x: 0.02, y: 0.1935, z: -0.201}
-  m_LocalScale: {x: 0.25496703, y: 0.25496703, z: 0.25496703}
+  m_LocalRotation: {x: -0.07122889, y: 0.01695294, z: 0.042210534, w: 0.9964223}
+  m_LocalPosition: {x: -0.04, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 420947197600351848}
+  m_Father: {fileID: 2714722546931762402}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 66.321, y: 86.772, z: 86.476}
+  m_LocalEulerAnglesHint: {x: -171.757, y: -178.392, z: 184.736}
 --- !u!33 &1942685619077531015
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7495,7 +7495,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9054306562650075988}
   - {fileID: 6783647046780655708}
   m_Father: {fileID: 5037727408655237761}
   m_RootOrder: -1
@@ -8132,13 +8131,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6852781816215944446}
+  - component: {fileID: 484081168021823608}
   - component: {fileID: 718838804679714436}
   - component: {fileID: 970065660651133203}
   - component: {fileID: 786018951063062522}
-  - component: {fileID: 484081168021823608}
+  - component: {fileID: 7275720521878991796}
   - component: {fileID: 1784403933353602762}
   - component: {fileID: 8789574366895803581}
-  - component: {fileID: 7275720521878991796}
   m_Layer: 0
   m_Name: Ana
   m_TagString: Player
@@ -8165,6 +8164,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &484081168021823608
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075963298249893444}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.48
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.025
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0.74, z: 0}
 --- !u!95 &718838804679714436
 Animator:
   serializedVersion: 4
@@ -8212,32 +8237,36 @@ MonoBehaviour:
   controller: {fileID: 484081168021823608}
   drag: 0.1
   InputReader: {fileID: 970065660651133203}
---- !u!143 &484081168021823608
-CharacterController:
+--- !u!114 &7275720521878991796
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6075963298249893444}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.48
-  m_Radius: 0.25
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.025
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.74, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f532f4afd5d8b49bc9ef4daaae2dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <WeaponsDatas>k__BackingField:
+  - <WeaponName>k__BackingField: Sword
+    <WeaponAnimationDrawName>k__BackingField: DrawSword
+    <WeaponAnimationDrawNameMovement>k__BackingField: 
+    <WeaponObject>k__BackingField: {fileID: 5557622743298477186}
+    <ForceWeaponTime>k__BackingField: 0
+    <ForceWeapon>k__BackingField: 0
+    <Damage>k__BackingField: 0
+    <Knockback>k__BackingField: 0
+  - <WeaponName>k__BackingField: Bow
+    <WeaponAnimationDrawName>k__BackingField: 
+    <WeaponAnimationDrawNameMovement>k__BackingField: 
+    <WeaponObject>k__BackingField: {fileID: 6928382324520662920}
+    <ForceWeaponTime>k__BackingField: 0
+    <ForceWeapon>k__BackingField: 0
+    <Damage>k__BackingField: 0
+    <Knockback>k__BackingField: 0
+  <Hand>k__BackingField: {fileID: 6393417760075563465}
 --- !u!114 &1784403933353602762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8260,11 +8289,11 @@ MonoBehaviour:
   <DashForce>k__BackingField: 1
   <DashStationaryForce>k__BackingField: 4
   <DashTime>k__BackingField: 0.2
-  <DashCoolDown>k__BackingField: 0
-  <RollForce>k__BackingField: 0
-  <RollStationaryForce>k__BackingField: 0
-  <RollTime>k__BackingField: 0
-  <RoolCoolDown>k__BackingField: 0
+  <DashCoolDown>k__BackingField: 1
+  <RollForce>k__BackingField: 1
+  <RollStationaryForce>k__BackingField: 4
+  <RollTime>k__BackingField: 0.5
+  <RoolCoolDown>k__BackingField: 1
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
 --- !u!114 &8789574366895803581
@@ -8284,32 +8313,6 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &7275720521878991796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6075963298249893444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f532f4afd5d8b49bc9ef4daaae2dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <WeaponsDatas>k__BackingField:
-  - <WeaponName>k__BackingField: Sword
-    <WeaponObject>k__BackingField: {fileID: 5557622743298477186}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <Knockback>k__BackingField: 0
-  - <WeaponName>k__BackingField: Bow
-    <WeaponObject>k__BackingField: {fileID: 6928382324520662920}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <Knockback>k__BackingField: 0
-  <Hand>k__BackingField: {fileID: 6393417760075563465}
 --- !u!1 &6142404270166905312
 GameObject:
   m_ObjectHideFlags: 0
@@ -8785,7 +8788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2714722546931762402}
   m_Layer: 0
-  m_Name: Sword_joint
+  m_Name: WeaponHolderSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8798,11 +8801,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6393417760075563465}
-  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0.0956, y: 0.0143, z: -0.0065}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.99351054, y: 0.055862743, z: 0.092368335, w: 0.035835367}
+  m_LocalPosition: {x: 0.094, y: 0.017, z: -0.002}
+  m_LocalScale: {x: 0.254967, y: 0.25496703, z: 0.254967}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9054306562650075988}
   m_Father: {fileID: 5398397173732810193}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}

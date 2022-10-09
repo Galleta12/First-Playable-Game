@@ -48,8 +48,10 @@ public Transform MainCameraPlayer {get; private set; }
 
 // all this should be hide on the inspector, the vertical velocity and the currment movement input
 [HideInInspector]
-public Vector3 currentMovement; public float verticalVelocity;
+public Vector3 currentMovement; 
 // all this data is for the jumping
+[HideInInspector]
+public float verticalVelocity;
 public float gravity {get; private set; } = -9.8f;
 public float intialJumpVelocity {get; private set; }
 

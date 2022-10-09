@@ -10,6 +10,13 @@ public class PlayerGroundState : PlayerBaseState
     private readonly int NormalStateBlendHash = Animator.StringToHash("NormalBlendTree"); 
     private readonly int NormalBlendSpeedHash = Animator.StringToHash("SpeedNormalBlend"); 
 
+    //  private readonly int WeaveHash = Animator.StringToHash("Weave"); 
+
+    //  private readonly int SpeedAttempthHash= Animator.StringToHash("MaskSpeed"); 
+
+
+   
+
     private const float AnimatorDampTime = 0.1f;
 
     private const float CrossFadeDuration = 0.1f;
@@ -28,6 +35,7 @@ public class PlayerGroundState : PlayerBaseState
        
     
        stateMachine.Animator.CrossFadeInFixedTime(NormalStateBlendHash, CrossFadeDuration);
+      
         // suscribe to all the methods
         stateMachine.InputReader.JumpEvent += OnJump;
         // you can only roll if you are grounded
@@ -41,7 +49,7 @@ public class PlayerGroundState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
 
-     
+      
       // get the current movements input
       Vector3 currentMove = CalculateNormalMovement();
       stateMachine.currentMovement.x = currentMove.x;
@@ -53,10 +61,13 @@ public class PlayerGroundState : PlayerBaseState
         if(stateMachine.InputReader.MovementValue == Vector2.zero){
          
              stateMachine.Animator.SetFloat(NormalBlendSpeedHash, 0 , AnimatorDampTime, deltaTime);
+            
             return;
         }
 
         stateMachine.Animator.SetFloat(NormalBlendSpeedHash, 1 , AnimatorDampTime, deltaTime);
+
+    
 
         // rotate the character depending on the inputs and the mouse 
         FaceLookMouse(stateMachine.currentMovement,deltaTime);
