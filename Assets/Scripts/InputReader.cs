@@ -13,13 +13,15 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
     public Vector2 MovementValue {get; private set;}
 
-    private  String KeyBoardNumber;
+    private  String KeyBoardNumber ;
 
     public int KeyBoardNumberInt => Convert.ToInt32(KeyBoardNumber);
    
    public String DeviceName {get; private set;}
 
     public bool  isJumping {get; private set;}
+
+    public bool  isAttacking {get; private set;}
 
 
     public event Action JumpEvent;
@@ -80,5 +82,14 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
        KeyBoardNumber =context.control.name;
        DeviceName =context.control.device.name;
        DrawEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if(context.performed){
+            isAttacking = true;
+        }else if(!context.performed){
+            isAttacking =false;
+        }
     }
 }

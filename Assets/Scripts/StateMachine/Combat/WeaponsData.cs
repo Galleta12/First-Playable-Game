@@ -7,23 +7,26 @@ using UnityEngine;
 [Serializable]
 public struct WeaponsData 
 {
-  
+  // the name of the weapon
   [field: SerializeField] public string WeaponName {get; private set;}
-
+// the name of the draw animation
   [field: SerializeField] public string WeaponAnimationDrawName {get; private set;}
-
+// name of the draw animation while is moving
    [field: SerializeField] public string WeaponAnimationDrawNameMovement {get; private set;}
+ // game object 
   [field: SerializeField] public GameObject WeaponObject {get;private set;}
 
-  [field: SerializeField] public float ForceWeaponTime {get; private set;} 
 
-  [field: SerializeField] public float ForceWeapon {get; private set;} 
+  [field: SerializeField] public float ForceTime {get; private set;} 
 
-  [field: SerializeField] public int Damage {get; private set;}
+     [field: SerializeField] public float Force {get; private set;} 
 
-  [field: SerializeField] public float Knockback {get; private set;}
+    [field: SerializeField] public int Damage {get; private set;}
 
-  
+    [field: SerializeField] public float Knockback {get; private set;} 
 
 
+     [field:SerializeField] public  ComboState [] ComboState {get; private set;}
+
+        
 }

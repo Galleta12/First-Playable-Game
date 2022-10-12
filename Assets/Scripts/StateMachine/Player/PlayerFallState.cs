@@ -67,7 +67,12 @@ public class PlayerFallState : PlayerBaseState
     }
 
      private void OnDumbleJump(){
-      stateMachine.SwitchState(new PlayerDoubleJumpState(stateMachine));
+      // if we have already double jump on the fall state
+      // we dont want to double jump until we are on the ground again
+      if(!stateMachine.DidITDoubleJump){
+       stateMachine.SwitchState(new PlayerDoubleJumpState(stateMachine));
+      }
+      
     }
 
    

@@ -16,7 +16,7 @@ public class WeaponHandler : MonoBehaviour
 // this is for the inventory, it will return the game object depending on the number input
    public Dictionary<int,GameObject> WeaponsSelectionHash {get; set;} = new Dictionary<int, GameObject>();
 //get the current weapon selected by the user
-private WeaponsData selectedWeapon;
+public WeaponsData selectedWeapon;
  
  
  private void Start() {
@@ -32,6 +32,7 @@ private WeaponsData selectedWeapon;
    
       GameObject weaponSelected = WeaponsSelectionHash[WeaponNumber];
       this.selectedWeapon = WeapondsDataHash[weaponSelected];
+      //Debug.Log(this.selectedWeapon.WeaponObject);
       return WeapondsDataHash[weaponSelected];
     
  }
@@ -67,6 +68,12 @@ private WeaponsData selectedWeapon;
     //events on the animation
     public void DrawWeapon(){
      this.selectedWeapon.WeaponObject.SetActive(true);
+     
+    }
+
+
+    public void Unsheathe(){
+        this.selectedWeapon.WeaponObject.SetActive(false);
     }
 
 

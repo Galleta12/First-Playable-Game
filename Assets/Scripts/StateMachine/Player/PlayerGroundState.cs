@@ -41,6 +41,9 @@ public class PlayerGroundState : PlayerBaseState
         // you can only roll if you are grounded
         stateMachine.InputReader.RollEvent += OnRoll;
         stateMachine.InputReader.DrawEvent += OnDraw;
+        // if we are ground we can double jump again;
+        // lets remeber that you can only double jump if you are on the fall or jumping state
+        stateMachine.DidITDoubleJump = false;
         
     }
 
@@ -54,6 +57,8 @@ public class PlayerGroundState : PlayerBaseState
       Vector3 currentMove = CalculateNormalMovement();
       stateMachine.currentMovement.x = currentMove.x;
       stateMachine.currentMovement.z = currentMove.z;
+
+      checkChanges();
 
       // to the variable for the movement set it as the inputs and multiply it by the speed 
       stateMachine.currentMovement = stateMachine.currentMovement * stateMachine.FreeLookMovementSpeed;
@@ -94,6 +99,20 @@ public class PlayerGroundState : PlayerBaseState
      
       
       
+    }
+
+
+
+    //change state to attack
+
+    private void checkChanges(){
+     
+      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
+     
+        stateMachine.SwitchState(new PlayerAttackingState(stateMachine,0));
+        return;
+        
+      }
     }
 
   // jump and roll event

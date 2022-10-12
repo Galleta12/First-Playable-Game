@@ -47,7 +47,7 @@ public Transform MainCameraPlayer {get; private set; }
 
 
 // all this should be hide on the inspector, the vertical velocity and the currment movement input
-[HideInInspector]
+
 public Vector3 currentMovement; 
 // all this data is for the jumping
 [HideInInspector]
@@ -77,6 +77,10 @@ public SetCoolDown setCoolDown;
 // each variable is for each cooldown time
 public float coolDownTimeDash {get; set; }
 public float coolDownTimeRoll {get; set; }
+// this is to dont allow multiple doubleJumps
+private bool didITDoubleJump = false;
+// make more protected the variable;
+public bool DidITDoubleJump {get{return didITDoubleJump;} set{didITDoubleJump = value;}}
 
 
 private void Start() {
@@ -120,7 +124,7 @@ private void handleGravity(float deltaTime)
 // the normal move of the character
 public void Move(Vector3 motion, float deltaTime){
  
-   
+     Debug.Log("This should be call now move");
       Controller.Move((motion + Movement) * deltaTime);
  
 }

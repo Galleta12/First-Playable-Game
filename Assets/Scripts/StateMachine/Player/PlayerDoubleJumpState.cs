@@ -41,6 +41,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.DrawEvent -= OnDraw;
+        stateMachine.DidITDoubleJump = true;
     }
 
     public override void IntiliazeSubState()

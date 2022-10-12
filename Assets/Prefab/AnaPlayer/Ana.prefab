@@ -7267,6 +7267,7 @@ GameObject:
   - component: {fileID: 9054306562650075988}
   - component: {fileID: 1942685619077531015}
   - component: {fileID: 6655938342806312996}
+  - component: {fileID: 7699467593109885594}
   m_Layer: 0
   m_Name: MagicSword_Ice
   m_TagString: Untagged
@@ -7339,6 +7340,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7699467593109885594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557622743298477186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec092672c1d940d4a90cc081fab29966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5589121873481639157
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,11 +8146,11 @@ GameObject:
   - component: {fileID: 6852781816215944446}
   - component: {fileID: 484081168021823608}
   - component: {fileID: 718838804679714436}
+  - component: {fileID: 8789574366895803581}
   - component: {fileID: 970065660651133203}
   - component: {fileID: 786018951063062522}
-  - component: {fileID: 7275720521878991796}
   - component: {fileID: 1784403933353602762}
-  - component: {fileID: 8789574366895803581}
+  - component: {fileID: 7275720521878991796}
   m_Layer: 0
   m_Name: Ana
   m_TagString: Player
@@ -8210,6 +8223,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8789574366895803581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075963298249893444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ae78466f6c564895a0b69bedd2e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 484081168021823608}
+  SphereRadius: 6
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &970065660651133203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8237,36 +8267,6 @@ MonoBehaviour:
   controller: {fileID: 484081168021823608}
   drag: 0.1
   InputReader: {fileID: 970065660651133203}
---- !u!114 &7275720521878991796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6075963298249893444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f532f4afd5d8b49bc9ef4daaae2dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <WeaponsDatas>k__BackingField:
-  - <WeaponName>k__BackingField: Sword
-    <WeaponAnimationDrawName>k__BackingField: DrawSword
-    <WeaponAnimationDrawNameMovement>k__BackingField: 
-    <WeaponObject>k__BackingField: {fileID: 5557622743298477186}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <Knockback>k__BackingField: 0
-  - <WeaponName>k__BackingField: Bow
-    <WeaponAnimationDrawName>k__BackingField: 
-    <WeaponAnimationDrawNameMovement>k__BackingField: 
-    <WeaponObject>k__BackingField: {fileID: 6928382324520662920}
-    <ForceWeaponTime>k__BackingField: 0
-    <ForceWeapon>k__BackingField: 0
-    <Damage>k__BackingField: 0
-    <Knockback>k__BackingField: 0
-  <Hand>k__BackingField: {fileID: 6393417760075563465}
 --- !u!114 &1784403933353602762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8296,7 +8296,7 @@ MonoBehaviour:
   <RoolCoolDown>k__BackingField: 1
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
---- !u!114 &8789574366895803581
+--- !u!114 &7275720521878991796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8305,14 +8305,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 6075963298249893444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88ae78466f6c564895a0b69bedd2e89, type: 3}
+  m_Script: {fileID: 11500000, guid: f5f532f4afd5d8b49bc9ef4daaae2dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 484081168021823608}
-  SphereRadius: 6
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
+  <WeaponsDatas>k__BackingField:
+  - <WeaponName>k__BackingField: Sword
+    <WeaponAnimationDrawName>k__BackingField: DrawSword
+    <WeaponAnimationDrawNameMovement>k__BackingField: DrawSwordRun
+    <WeaponObject>k__BackingField: {fileID: 5557622743298477186}
+    <ForceTime>k__BackingField: 0
+    <Force>k__BackingField: 0
+    <Damage>k__BackingField: 0
+    <Knockback>k__BackingField: 0
+    <ComboState>k__BackingField:
+    - <AnimationNameCombo>k__BackingField: Attack1
+      <TransitionDuration>k__BackingField: 0
+      <ComboNextStateIndex>k__BackingField: 1
+      <ComboAttackTime>k__BackingField: 0
+    - <AnimationNameCombo>k__BackingField: Attack2
+      <TransitionDuration>k__BackingField: 0
+      <ComboNextStateIndex>k__BackingField: 2
+      <ComboAttackTime>k__BackingField: 0
+    - <AnimationNameCombo>k__BackingField: Attack3
+      <TransitionDuration>k__BackingField: 0
+      <ComboNextStateIndex>k__BackingField: -1
+      <ComboAttackTime>k__BackingField: 0
+  - <WeaponName>k__BackingField: Bow
+    <WeaponAnimationDrawName>k__BackingField: 
+    <WeaponAnimationDrawNameMovement>k__BackingField: 
+    <WeaponObject>k__BackingField: {fileID: 6928382324520662920}
+    <ForceTime>k__BackingField: 0
+    <Force>k__BackingField: 0
+    <Damage>k__BackingField: 0
+    <Knockback>k__BackingField: 0
+    <ComboState>k__BackingField: []
+  <Hand>k__BackingField: {fileID: 6393417760075563465}
 --- !u!1 &6142404270166905312
 GameObject:
   m_ObjectHideFlags: 0

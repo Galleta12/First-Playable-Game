@@ -98,6 +98,7 @@ public class PlayerDashState : PlayerBaseState
         // since we change state we can subscribe again to the dash, therefore we can trigger this state again
         stateMachine.InputReader.DashEvent += stateMachine.OnDash;
         // we can subscrine to the delegate for the normal movement again
+        // I should check this not sure if it is working properly
         stateMachine.moveDelegate = stateMachine.Move;
         
         // this is the cooldown time variable, as soon as we exit we want to start the cool down time

@@ -134,10 +134,10 @@ protected bool GetStateOfAnimation(Animator animator, string animationName){
    AnimatorStateInfo currentAnimation = animator.GetCurrentAnimatorStateInfo(0);
     if(currentAnimation.normalizedTime > 1.0f && currentAnimation.IsTag(animationName)){
       
-      Debug.Log("This is true");
+      //Debug.Log("This is true");
      return false;
     }else{
-        Debug.Log("This is false");
+        //Debug.Log("This is false");
        return true;
       
       

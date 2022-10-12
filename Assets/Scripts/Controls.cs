@@ -80,6 +80,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d02bffe-7376-4b2b-bd47-09a36feea2b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""DrawWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8c39dbe-4ab5-4e49-8a91-68dd503dff04"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +320,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_DrawWeapon = m_Player.FindAction("DrawWeapon", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -365,6 +386,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_DrawWeapon;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -375,6 +397,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @DrawWeapon => m_Wrapper.m_Player_DrawWeapon;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -402,6 +425,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @DrawWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrawWeapon;
                 @DrawWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrawWeapon;
                 @DrawWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrawWeapon;
+                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -424,6 +450,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @DrawWeapon.started += instance.OnDrawWeapon;
                 @DrawWeapon.performed += instance.OnDrawWeapon;
                 @DrawWeapon.canceled += instance.OnDrawWeapon;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -454,5 +483,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnDrawWeapon(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

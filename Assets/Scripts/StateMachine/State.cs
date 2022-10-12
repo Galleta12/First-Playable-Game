@@ -19,12 +19,18 @@ public abstract class State
 
   public abstract void IntiliazeSubState();
 // function locally defined
+// check how far from an animation we are
 protected float GetNormalizedTime(Animator animator){
+
+  //animator annonying you can be on multiple states
+  //this will help us to check on which animator we are
+  // if we are blending on two we can check on which we are currently int
 
   AnimatorStateInfo currentAnimator = animator.GetCurrentAnimatorStateInfo(0);
   AnimatorStateInfo nextAnimator = animator.GetNextAnimatorStateInfo(0);
 
-
+   // if the animator is on trasition and the tag is Attack
+   //this means we are not on trasition, therefore we are on our current state
     if(animator.IsInTransition(0) && nextAnimator.IsTag("Attack")){
             return nextAnimator.normalizedTime;
         }else if(!animator.IsInTransition(0) && currentAnimator.IsTag("Attack")){
@@ -32,6 +38,9 @@ protected float GetNormalizedTime(Animator animator){
         }else{
             return 0f;
         }
+
+        // if the normalize time is greater than 1, it means that we havent done anything the animation has finished
+        
 }
 
 

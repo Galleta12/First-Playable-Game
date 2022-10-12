@@ -60,7 +60,13 @@ public class PlayerDrawWeapons : PlayerBaseState
     
       
       if(!GetStateOfAnimation(stateMachine.Animator,currentWeapon.WeaponAnimationDrawName)){
-         stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+         
+         if(stateMachine.Controller.isGrounded){
+          stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+         }else{
+          stateMachine.SwitchState(new PlayerFallState(stateMachine));
+         }
+         
       }
 
       
