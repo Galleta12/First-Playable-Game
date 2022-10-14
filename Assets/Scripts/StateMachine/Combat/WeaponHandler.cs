@@ -16,7 +16,9 @@ public class WeaponHandler : MonoBehaviour
 // this is for the inventory, it will return the game object depending on the number input
    public Dictionary<int,GameObject> WeaponsSelectionHash {get; set;} = new Dictionary<int, GameObject>();
 //get the current weapon selected by the user
-public WeaponsData selectedWeapon;
+ // extra layer of security
+ private WeaponsData SelectedWeapon;
+ public WeaponsData selectedWeapon{get{return SelectedWeapon;}set{SelectedWeapon = value;}}
  
  
  private void Start() {

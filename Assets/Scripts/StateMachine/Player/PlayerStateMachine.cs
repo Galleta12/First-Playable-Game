@@ -40,6 +40,8 @@ public class PlayerStateMachine : StateMachine
 [field: SerializeField] public float RollTime {get; private set; }
 // the cooldown for the roll
 [field: SerializeField] public float RoolCoolDown {get;set; }
+// drag for external forces to the player, like the impact
+[field: SerializeField] public float drag{get; private set; }
 
 
 // get acces to the main camera that  is using the cinemachine
@@ -124,7 +126,7 @@ private void handleGravity(float deltaTime)
 // the normal move of the character
 public void Move(Vector3 motion, float deltaTime){
  
-     Debug.Log("This should be call now move");
+     //Debug.Log("This should be call now move");
       Controller.Move((motion + Movement) * deltaTime);
  
 }

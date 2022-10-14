@@ -16,15 +16,9 @@ public struct WeaponsData
  // game object 
   [field: SerializeField] public GameObject WeaponObject {get;private set;}
 
-
-  [field: SerializeField] public float ForceTime {get; private set;} 
-
-     [field: SerializeField] public float Force {get; private set;} 
+    [field: SerializeField] public GameObject WeaponCollider {get;private set;}
 
     [field: SerializeField] public int Damage {get; private set;}
-
-    [field: SerializeField] public float Knockback {get; private set;} 
-
 
      [field:SerializeField] public  ComboState [] ComboState {get; private set;}
 
