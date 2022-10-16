@@ -12,6 +12,8 @@ public class PlayerStateMachine : StateMachine
 [field: SerializeField] public Animator Animator {get; private set; }
 // gameobject weapon
 [field:SerializeField] public WeaponHandler Weapon {get; private set; }
+
+[field:SerializeField] public RayCast RayCaster {get; private set; }
 // the speed of the player
 [field: SerializeField] public float FreeLookMovementSpeed {get; private set; }
 // speed when is jumping
@@ -94,6 +96,9 @@ private void Start() {
     MainCameraPlayer = Camera.main.transform;
     // suscribe to an event of the dash
      InputReader.DashEvent += OnDash;
+
+     //this is a test
+     InputReader.TargetEvent += OnTarget;
    
     SwitchState(new PlayerGroundState(this));
      
@@ -148,6 +153,11 @@ public void OnDash(){
        SwitchState(new PlayerDashState(this,this.currentMovement));
     }
     
+}
+
+
+public void OnTarget(){
+    SwitchState(new PlayerTargetState(this));
 }
 
 }

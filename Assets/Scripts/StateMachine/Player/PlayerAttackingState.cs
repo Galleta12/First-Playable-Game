@@ -14,6 +14,8 @@ public class PlayerAttackingState : PlayerBaseState
     private Vector3 dampingVelocity;
 
     private bool alreadyAppliedForce = false;
+
+    private Vector3 currentInput;
     public PlayerAttackingState(PlayerStateMachine stateMachine, int comboIdx) : base(stateMachine)
     {
         isRootState = true;
@@ -35,8 +37,11 @@ public class PlayerAttackingState : PlayerBaseState
     
     public override void Tick(float deltaTime)
     {
-      
-
+      // get the current input and set the new rotation;
+       currentInput = CalculateNormalMovement().normalized;
+       SetRotation(currentInput,deltaTime);
+       
+        
         MoveAttack(deltaTime);
         
         float normalizedTime = GetNormalizedTime(stateMachine.Animator);
@@ -62,6 +67,7 @@ public class PlayerAttackingState : PlayerBaseState
        
     }
 
+   
 
     public override void Exit()
     {
@@ -105,7 +111,7 @@ public class PlayerAttackingState : PlayerBaseState
   private void MoveAttack(float deltaTime){
  
      //Debug.Log("This should be call now move");
-      stateMachine.Controller.Move((impact + stateMachine.Movement) * deltaTime);
+      stateMachine.Controller.Move((impact + stateMachine.Movement + currentInput) * deltaTime);
  
 } 
 
@@ -121,5 +127,18 @@ private void setDamageWeapon(){
  }
   
 }
+
+
+private void SetRotation(Vector3 direction,float deltaTime){
+    if(direction == Vector3.zero){return;}
+    stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation,
+    Quaternion.LookRotation(direction),
+    deltaTime * stateMachine.RotationDampSpeed/2
+    );
+
+
+}
+
+
 
 }

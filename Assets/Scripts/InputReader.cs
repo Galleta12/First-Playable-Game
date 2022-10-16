@@ -30,7 +30,9 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     public event Action DashEvent;
      public event Action RollEvent;
 
-       public event Action DrawEvent;
+    public event Action DrawEvent;
+
+    public event Action TargetEvent;
 
 
 
@@ -91,5 +93,11 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
         }else if(!context.performed){
             isAttacking =false;
         }
+    }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+       if(!context.performed){return;}
+       TargetEvent?.Invoke();
     }
 }
