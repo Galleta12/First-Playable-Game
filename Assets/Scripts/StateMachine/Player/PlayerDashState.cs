@@ -19,6 +19,7 @@ public class PlayerDashState : PlayerBaseState
    // the ramianing time to stop the dash
     private float remainingDashtTime;
 
+
   
 
     
@@ -57,6 +58,7 @@ public class PlayerDashState : PlayerBaseState
       // we want the current movement input to be the last inputs multiply by the dash force
       // we divide by the time, since we want to move with this force during the set lenght of the dash time on the statemachine
       stateMachine.currentMovement =  this.MovementDash * stateMachine.DashForce / stateMachine.DashTime;
+      
       FaceLookMouse(MovementDash, deltaTime);
       UpdateAnimator();
      // if we are not grounded therefore we are going to disregard the gravity will we are dashing
@@ -85,7 +87,7 @@ public class PlayerDashState : PlayerBaseState
               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
         }
 
-
+   
          
 
     }
@@ -138,9 +140,8 @@ public class PlayerDashState : PlayerBaseState
 
     }
 
-
     
-
+    
 
  
 

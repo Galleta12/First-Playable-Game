@@ -7,6 +7,20 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.baracuda.runtime-monitoring": {
+      "version": "file:com.baracuda.runtime-monitoring",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.baracuda.thread-dispatcher": "5.0.0"
+      }
+    },
+    "com.baracuda.thread-dispatcher": {
+      "version": "file:com.baracuda.thread-dispatcher",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

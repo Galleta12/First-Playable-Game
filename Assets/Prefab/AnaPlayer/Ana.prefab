@@ -8245,13 +8245,13 @@ GameObject:
   - component: {fileID: 6852781816215944446}
   - component: {fileID: 484081168021823608}
   - component: {fileID: 718838804679714436}
-  - component: {fileID: 8789574366895803581}
   - component: {fileID: 970065660651133203}
   - component: {fileID: 786018951063062522}
   - component: {fileID: 1784403933353602762}
   - component: {fileID: 7275720521878991796}
   - component: {fileID: 4844974419467623617}
   - component: {fileID: 7482593810324444634}
+  - component: {fileID: 8016253616709937657}
   m_Layer: 0
   m_Name: Ana
   m_TagString: Player
@@ -8324,23 +8324,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8789574366895803581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6075963298249893444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88ae78466f6c564895a0b69bedd2e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 484081168021823608}
-  SphereRadius: 6
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &970065660651133203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8473,6 +8456,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponLogic: {fileID: 1163984548882885134}
+--- !u!114 &8016253616709937657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075963298249893444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041d01500a1eae24b8850672ecfa2686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InputReader>k__BackingField: {fileID: 970065660651133203}
+  <controller>k__BackingField: {fileID: 484081168021823608}
+  SphereRadius: 5
+  <viewAngle>k__BackingField: 171.4
+  <EnemyMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <ObstacleMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 128
+  <PlayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6142404270166905312
 GameObject:
   m_ObjectHideFlags: 0

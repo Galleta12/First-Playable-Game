@@ -41,9 +41,13 @@ public class PlayerGroundState : PlayerBaseState
         // you can only roll if you are grounded
         stateMachine.InputReader.RollEvent += OnRoll;
         stateMachine.InputReader.DrawEvent += OnDraw;
+
+        stateMachine.InputReader.TargetEvent += OnTarget;
         // if we are ground we can double jump again;
         // lets remeber that you can only double jump if you are on the fall or jumping state
         stateMachine.DidITDoubleJump = false;
+
+        stateMachine.IsTargeting = false;
         
     }
 
@@ -91,6 +95,7 @@ public class PlayerGroundState : PlayerBaseState
        stateMachine.InputReader.JumpEvent -= OnJump;
        stateMachine.InputReader.RollEvent -= OnRoll;
         stateMachine.InputReader.DrawEvent -= OnDraw;
+         stateMachine.InputReader.TargetEvent -= OnTarget;
       
     }
 
@@ -125,6 +130,15 @@ public class PlayerGroundState : PlayerBaseState
         if(stateMachine.coolDownTimeRoll <=0f){
           stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
         }
+      
+    }
+
+
+      private void OnTarget(){
+        
+       
+        stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+        
       
     }
 

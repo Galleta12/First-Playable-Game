@@ -16,6 +16,9 @@ public class PlayerAttackingState : PlayerBaseState
     private bool alreadyAppliedForce = false;
 
     private Vector3 currentInput;
+
+
+    private Target currentTargetAttack;
     public PlayerAttackingState(PlayerStateMachine stateMachine, int comboIdx) : base(stateMachine)
     {
         isRootState = true;
@@ -23,6 +26,9 @@ public class PlayerAttackingState : PlayerBaseState
        this.ComboCurrent = stateMachine.Weapon.selectedWeapon.ComboState[comboIdx];
        // we also want to get the current selected weapon
         this.currentWeapon = stateMachine.Weapon.selectedWeapon;
+        
+        this.currentTargetAttack = stateMachine.Targeters.currentTarget;
+        
     }
 
     public override void Enter()
@@ -37,12 +43,14 @@ public class PlayerAttackingState : PlayerBaseState
     
     public override void Tick(float deltaTime)
     {
-      // get the current input and set the new rotation;
-       currentInput = CalculateNormalMovement().normalized;
-       SetRotation(currentInput,deltaTime);
+     
        
-        
-        MoveAttack(deltaTime);
+        //move the character taking into count the impulse force
+        MoveAttack(deltaTime);    
+        //check if we should rotate
+        if(currentTargetAttack !=null){
+          RotateToTarget();
+        }
         
         float normalizedTime = GetNormalizedTime(stateMachine.Animator);
         // this means that we are on an animation if is greater than 1 we are not doing nothing therefore we can change the state
@@ -126,17 +134,6 @@ private void setDamageWeapon(){
     sword.SetAttack(currentWeapon.Damage);
  }
   
-}
-
-
-private void SetRotation(Vector3 direction,float deltaTime){
-    if(direction == Vector3.zero){return;}
-    stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation,
-    Quaternion.LookRotation(direction),
-    deltaTime * stateMachine.RotationDampSpeed/2
-    );
-
-
 }
 
 

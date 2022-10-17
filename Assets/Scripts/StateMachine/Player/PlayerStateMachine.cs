@@ -12,10 +12,13 @@ public class PlayerStateMachine : StateMachine
 [field: SerializeField] public Animator Animator {get; private set; }
 // gameobject weapon
 [field:SerializeField] public WeaponHandler Weapon {get; private set; }
+//for the target data 
+[field:SerializeField] public Targeter Targeters {get; private set; }
 
-[field:SerializeField] public RayCast RayCaster {get; private set; }
 // the speed of the player
 [field: SerializeField] public float FreeLookMovementSpeed {get; private set; }
+
+[field: SerializeField] public float TargetMovementSpeed {get; private set; }
 // speed when is jumping
 [field: SerializeField] public float JumpMoveSpeed {get; private set; }
 
@@ -86,6 +89,11 @@ private bool didITDoubleJump = false;
 // make more protected the variable;
 public bool DidITDoubleJump {get{return didITDoubleJump;} set{didITDoubleJump = value;}}
 
+// this is to check if we are on target state
+private bool isTargeting=false;
+//to make it more protective
+public bool IsTargeting{get{return isTargeting;}set{isTargeting=value;}}
+
 
 private void Start() {
     //set up the delegate for the move
@@ -97,9 +105,6 @@ private void Start() {
     // suscribe to an event of the dash
      InputReader.DashEvent += OnDash;
 
-     //this is a test
-     InputReader.TargetEvent += OnTarget;
-   
     SwitchState(new PlayerGroundState(this));
      
 }
@@ -156,8 +161,5 @@ public void OnDash(){
 }
 
 
-public void OnTarget(){
-    SwitchState(new PlayerTargetState(this));
-}
 
 }

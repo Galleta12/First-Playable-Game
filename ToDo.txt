@@ -1,0 +1,6 @@
+17 of October things to do for the next 3 to 4 days
+The attacking state is improved with the selection of characters
+Still need to work more on the selection, maybe do check if we should change targert or not
+have the same variable as current target
+Create a new roll and dash state
+I will start working with c++, maybe for three 3 days break of unity

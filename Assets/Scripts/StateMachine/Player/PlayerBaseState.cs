@@ -70,6 +70,16 @@ protected Vector3 CalculateNormalMovement(){
 }
 
 
+    protected Vector3 CalculateTargetMovement(){
+       Vector3 movement = new Vector3();
+       movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+       movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+
+       return movement;
+
+    }
+
+
 
 
 
@@ -88,6 +98,28 @@ protected void FaceLookMouse( Vector3 direction,float deltaTime){
     );
 
 }
+
+  protected void RotateToTarget(){
+       if(stateMachine.Targeters.currentTarget == null){return;}
+       // direction to where is the target
+       Vector3 lookTarget = stateMachine.Targeters.currentTarget.transform.position - stateMachine.transform.position;
+       lookTarget.y = 0f;
+       stateMachine.transform.rotation = Quaternion.LookRotation(lookTarget);
+    }
+
+
+    protected void RotateClosestTarget(){
+       
+       
+       stateMachine.Targeters.setClosestTarget();
+       
+       if(stateMachine.Targeters.currentTarget == null){return;}
+       // direction to where is the target
+       Vector3 lookTarget = stateMachine.Targeters.currentTarget.transform.position - stateMachine.transform.position;
+       lookTarget.y = 0f;
+       stateMachine.transform.rotation = Quaternion.LookRotation(lookTarget);
+    }
+
 
 //this the the method saved on the delegate setcooldown
 protected void handleCoolDownDash(float deltaTime){
