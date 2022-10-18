@@ -11,6 +11,8 @@ public class PlayerTargetState : PlayerBaseState
     private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
     private const float CrossFadeDuration = 0.1f;
+
+    private Vector3 targetMovement;
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         isRootState = true;
@@ -22,7 +24,7 @@ public class PlayerTargetState : PlayerBaseState
        stateMachine.moveDelegate -=  stateMachine.Move;
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
 
-        stateMachine.InputReader.RollEvent += OnRoll;
+        stateMachine.InputReader.RollEvent += OnDodge;
         
     }
 
@@ -31,27 +33,20 @@ public class PlayerTargetState : PlayerBaseState
     {
         
 
-        Vector3 targetMovement = CalculateTargetMovement();
+        targetMovement = CalculateTargetMovement();
         NewMoveTarget(targetMovement * stateMachine.TargetMovementSpeed,deltaTime);
         UpdateAnimator(deltaTime);
         
-    if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
+        if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
      
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine,0));
         return;
         
       }
         
-        
-        if(stateMachine.InputReader.MovementValue != Vector2.zero){
-           RotateToTarget();
-           return;
-        }
-        else{
-          RotateClosestTarget();
-          return;
-        }
        
+           RotateToTarget();
+   
       
     }
 
@@ -60,7 +55,7 @@ public class PlayerTargetState : PlayerBaseState
         
          stateMachine.moveDelegate =  stateMachine.Move;
          stateMachine.IsTargeting = true;
-         stateMachine.InputReader.RollEvent -= OnRoll;
+         stateMachine.InputReader.RollEvent -= OnDodge;
     }
 
     public override void IntiliazeSubState()
@@ -108,11 +103,12 @@ public class PlayerTargetState : PlayerBaseState
     }
 
 
-       private void OnRoll(){
+       private void OnDodge(){
         
-        if(stateMachine.coolDownTimeRoll <=0f){
-          stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
-        }
+      
+         stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+          //stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
+       
       
     }
 

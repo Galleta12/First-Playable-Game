@@ -16,7 +16,7 @@ MonoBehaviour:
   autoInstantiateUI: 1
   asyncProfiling: 1
   openDisplayOnLoad: 1
-  allowMultipleUIInstances: 0
+  allowMultipleUIInstances: 1
   monitoringUIOverride: {fileID: 0}
   showRuntimeMonitoringObject: 0
   logBadImageFormatException: 0

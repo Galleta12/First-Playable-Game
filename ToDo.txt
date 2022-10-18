@@ -1,6 +1,13 @@
 17 of October things to do for the next 3 to 4 days
-The attacking state is improved with the selection of characters
-Still need to work more on the selection, maybe do check if we should change targert or not
-have the same variable as current target
-Create a new roll and dash state
-I will start working with c++, maybe for three 3 days break of unity
+work more on the attack to improve it add knockback
+not able to make it work with roll 
+howver I make a dodgestate and I working good
+Need to add comments and add variables to have more protected the dodgestate
+WOrk more on the target state
+attack state add cancelations
+
+Add air attack
+
+Improve the draw weapon system
+
+I will do all this before friday

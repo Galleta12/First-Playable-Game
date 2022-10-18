@@ -16,6 +16,7 @@ public class PlayerRollstate : PlayerBaseState
     public PlayerRollstate(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
      isRootState = true;
+     Debug.Log(currentMotion);
     
     if(currentMotion == Vector3.zero){
         this.RollInput = getMouseDirection() * stateMachine.RollStationaryForce;
@@ -38,8 +39,10 @@ public class PlayerRollstate : PlayerBaseState
         
        
         stateMachine.currentMovement = this.RollInput * stateMachine.RollForce / stateMachine.RollTime;
-        
+      
         FaceLookMouse(this.RollInput, deltaTime);
+        
+       
        
        remainingRollTime -=deltaTime;
        

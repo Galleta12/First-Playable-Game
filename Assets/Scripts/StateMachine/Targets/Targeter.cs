@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Targeter : MonoBehaviour
 {
    [field: SerializeField] public InputReader InputReader {get; private set;}
@@ -18,7 +19,8 @@ public class Targeter : MonoBehaviour
    [field: SerializeField] public LayerMask ObstacleMask{get; private set;}
 
    [field: SerializeField] public LayerMask PlayerMask{get; private set;}
-
+  
+  
   public Target currentTarget{get; private set;}
 
 
@@ -41,9 +43,34 @@ public class Targeter : MonoBehaviour
 // for the gizmos
     private bool enemyDected = false;
 
+
+    //delegates for the selection of target
+    private delegate void SelectionofTarget(bool isdetected, RaycastHit info, Vector3 currentInputs);
+    private SelectionofTarget selectionofTarget;
+
+
+
 private void Start() {
+   
     Maincamera  = Camera.main.transform;
+    StartCoroutine("SetClosestTargetDelay",5f);
+   // StartCoroutine("SetSelectedTarget",2f);
   
+}
+
+private IEnumerator SetClosestTargetDelay(float delay){
+    while(true){
+        yield return new WaitForSeconds(delay);
+        setClosestTarget();
+    }
+}
+
+
+private IEnumerator SetSelectedTarget(float delay){
+    while(true){
+        yield return new WaitForSeconds(delay);
+       selectionofTarget = selectTarget;
+    }
 }
 
 
@@ -75,11 +102,12 @@ private void Update() {
      
         // first check if user has seleted a target
         
-            bool isDetectedAnEnemy = Physics.Raycast(transform.position,inputs,out info,dist,EnemyMask) || 
+        bool isDetectedAnEnemy = Physics.Raycast(transform.position,inputs,out info,dist,EnemyMask) || 
             Physics.Raycast(heightPlayer,inputs,out info,dist,EnemyMask) || 
             Physics.Raycast(centerPlayer,inputs,out info,dist,EnemyMask);
            if(isDetectedAnEnemy){
             enemyDected = true;
+            //selectionofTarget?.Invoke(isDetectedAnEnemy,info,inputs);
             selectTarget(isDetectedAnEnemy,info,inputs);
                 
             } else{
@@ -115,14 +143,14 @@ private void Update() {
 
 private void selectTarget(bool isdetected, RaycastHit info, Vector3 currentInputs){
    
+   if(InputReader.MovementValue == Vector2.zero){return;}
+   Debug.Log("The inputs selection functionis being call");
        // I can do a backwards raycast, from the target, and the direction be the negative inputs and if it hits the player, it would 
        //mean that the direction is the same
        if(info.collider.TryGetComponent<Target>(out Target target)){
-        currentTarget = target;
+        this.currentTarget = target;
        }
-     
-    
-
+    //selectionofTarget -= selectTarget;
 }
 
 public Transform GetClosestTarget(){
@@ -233,6 +261,9 @@ public Target returnTarget(){
 
 
 public void setClosestTarget(){
+    Debug.Log("the set is being call");
+    
+    if(InputReader.MovementValue != Vector2.zero){return;}
     if(GetClosestTarget() != null){
         if(!GetClosestTarget().TryGetComponent<Target>(out Target target)){return;}
         this.currentTarget = target;
@@ -240,15 +271,16 @@ public void setClosestTarget(){
    
 }
 private void checkIfitExists(){
+    Debug.Log("This should work");
     if(currentEnemiesList.Count !=0){
-         if(currentTarget !=null){
+    if(currentTarget !=null){
       if(currentEnemiesList.Contains(currentTarget.transform)){return;}
         this.currentTarget = null;
          }
          
+    } else{
+        this.currentTarget = null; 
     }
-  
-    
 }
 
 
