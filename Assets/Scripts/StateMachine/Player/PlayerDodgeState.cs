@@ -17,7 +17,7 @@ public class PlayerDodgeState : PlayerBaseState
 
     private Vector3 DodgeInput;
 
-    private float remainingRollTime;
+    private float remainingDodgeTime;
     
     
     
@@ -25,15 +25,20 @@ public class PlayerDodgeState : PlayerBaseState
     
     public PlayerDodgeState(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
-    isRootState = true;
-    this.DodgeInput = currentMotion;
+        isRootState = true;
+        if(currentMotion!= Vector3.zero){
+           this.DodgeInput = currentMotion;
+        }
+       
     }
 
     public override void Enter()
     {
-        remainingRollTime = stateMachine.RollTime;
+        remainingDodgeTime = stateMachine.DodgeTime;
     
+        // we are going to hanlde the move we dont want to be subscribe on the main move delgate
         stateMachine.moveDelegate -= stateMachine.Move;
+        // for the animator
         stateMachine.Animator.SetFloat(DodgeForwardHash,DodgeInput.y);
         stateMachine.Animator.SetFloat(DodgeRightHash,DodgeInput.x);
          stateMachine.Animator.CrossFadeInFixedTime(DodgeBlendTreeHash, CrossFadeDuration);
@@ -44,18 +49,26 @@ public class PlayerDodgeState : PlayerBaseState
      public override void Tick(float deltaTime)
     {
         
+        if(DodgeInput !=Vector3.zero){
+             // get the movement regarding the current motion passed on the constructor
+            Vector3 dodgemove = new Vector3(); 
+            dodgemove+= stateMachine.transform.right * DodgeInput.x * stateMachine.DodgeForce/stateMachine.DodgeTime;
+            dodgemove+= stateMachine.transform.forward * DodgeInput.y * stateMachine.DodgeForce/stateMachine.DodgeTime;
+            NewMoveTargetDodge( dodgemove,deltaTime);
+        }else{
+            Vector3 dodgeMousedirection = new Vector3();
+            dodgeMousedirection += stateMachine.transform.right * getMouseDirection().x * stateMachine.DodgeForce/stateMachine.DodgeTime;
+             dodgeMousedirection += stateMachine.transform.forward * getMouseDirection().z * stateMachine.DodgeForce/stateMachine.DodgeTime;
+             NewMoveTargetDodge(dodgeMousedirection,deltaTime);
+        }
         
-        Vector3 dodgemove = new Vector3(); 
-        dodgemove+= stateMachine.transform.right * DodgeInput.x * stateMachine.RollForce/stateMachine.RollTime;
-        dodgemove+= stateMachine.transform.forward * DodgeInput.y * stateMachine.RollForce/stateMachine.RollTime;
-        NewMoveTargetRoll( dodgemove,deltaTime);
         
-       RotateToTarget();
+        RotateToTarget();
         
-        remainingRollTime -=deltaTime;
+        remainingDodgeTime -=deltaTime;
        
           
-        if ( remainingRollTime <= 0f)
+        if ( remainingDodgeTime <= 0f)
         {
            
               stateMachine.SwitchState(new PlayerTargetState(stateMachine));
@@ -64,8 +77,8 @@ public class PlayerDodgeState : PlayerBaseState
     
     public override void Exit()
     {
-       stateMachine.coolDownTimeRoll = stateMachine.RoolCoolDown;
-       stateMachine.setCoolDown += handleCoolDownRoll;
+       
+       //subscribe back to the move delegate
        stateMachine.moveDelegate = stateMachine.Move;
     }
 
@@ -74,13 +87,17 @@ public class PlayerDodgeState : PlayerBaseState
        
     }
 
-    
+    // if if not moving we want to move depending on the mouse direction
     private Vector3 getMouseDirection()
     {
         Vector3 camera_z = stateMachine.MainCameraPlayer.forward;
-
+      
         camera_z.y =0f;
+        
         camera_z.Normalize();
+       
+        
+        
         return camera_z;
 
        
@@ -89,8 +106,8 @@ public class PlayerDodgeState : PlayerBaseState
 
    
 
-
-      private void NewMoveTargetRoll(Vector3 motion, float deltaTime){
+     // this will handle the target move
+      private void NewMoveTargetDodge(Vector3 motion, float deltaTime){
        stateMachine.Controller.Move((stateMachine.Movement + motion) * deltaTime);
     }
 

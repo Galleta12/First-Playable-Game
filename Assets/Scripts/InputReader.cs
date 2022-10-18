@@ -34,6 +34,8 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
     public event Action TargetEvent;
 
+    public event Action DodgeEvent;
+
 
 
 
@@ -99,5 +101,11 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
        if(!context.performed){return;}
        TargetEvent?.Invoke();
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if(!context.performed){return;}
+        DodgeEvent?.Invoke();
     }
 }

@@ -34,8 +34,16 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Enter()
     {
         setDamageWeapon();
+        
         stateMachine.moveDelegate -= stateMachine.Move;
+        
         stateMachine.Animator.CrossFadeInFixedTime(ComboCurrent.AnimationNameCombo,ComboCurrent.TransitionDuration);
+
+         stateMachine.InputReader.JumpEvent += OnJump;
+         
+         stateMachine.InputReader.DodgeEvent += OnDodge;
+
+          stateMachine.InputReader.RollEvent += OnRoll;
 
        
     }
@@ -49,7 +57,7 @@ public class PlayerAttackingState : PlayerBaseState
         MoveAttack(deltaTime);    
         //check if we should rotate
         if(currentTargetAttack !=null){
-          RotateToTarget();
+         RotateToTarget();
         }
         
         float normalizedTime = GetNormalizedTime(stateMachine.Animator);
@@ -68,7 +76,14 @@ public class PlayerAttackingState : PlayerBaseState
             TryNextCombo(normalizedTime);
          }
         }else{
-            stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+            if(stateMachine.Targeters.currentTarget == null){
+               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+               return;
+            }else if(stateMachine.Targeters.currentTarget != null){
+                stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+               return;
+            }  
+           
         }
         // need to know more about this, the dampingvelocity is only for this code, but we ensure to smootly go back to zero
         impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity,stateMachine.drag);
@@ -80,6 +95,13 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Exit()
     {
        stateMachine.moveDelegate = stateMachine.Move; 
+
+
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
+
+        stateMachine.InputReader.RollEvent -= OnRoll;
+
+        stateMachine.InputReader.JumpEvent -= OnJump;
     }
     public override void IntiliazeSubState()
     {
@@ -135,6 +157,29 @@ private void setDamageWeapon(){
  }
   
 }
+
+
+
+       private void OnDodge(){
+        
+         stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+        
+    }
+
+
+        private void OnRoll()
+    {
+       stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
+    }
+
+       private void OnJump(){
+        stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+    }
+
+
+
+
+
 
 
 

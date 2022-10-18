@@ -1,13 +1,9 @@
-17 of October things to do for the next 3 to 4 days
-work more on the attack to improve it add knockback
-not able to make it work with roll 
-howver I make a dodgestate and I working good
-Need to add comments and add variables to have more protected the dodgestate
-WOrk more on the target state
-attack state add cancelations
-
-Add air attack
-
-Improve the draw weapon system
-
-I will do all this before friday
+18 of October things to do for the next 3 to 4 days
+the target and selection is improved
+we are doing the selection with the dot product
+the dodge is working fine and the attack as well
+need to work more on the change of state if you are on the target state
+//
+improve the change of state
+do the knockback
+do the inventory

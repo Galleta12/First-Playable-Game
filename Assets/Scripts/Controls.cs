@@ -98,6 +98,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8ecd2bb-fcfe-4869-a6d7-9ca5fc93bcfd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Target"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63212572-33d8-4f23-91a2-a864512721ec"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -342,6 +362,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_DrawWeapon = m_Player.FindAction("DrawWeapon", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
+        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -409,6 +430,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DrawWeapon;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Target;
+    private readonly InputAction m_Player_Dodge;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -421,6 +443,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @DrawWeapon => m_Wrapper.m_Player_DrawWeapon;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Target => m_Wrapper.m_Player_Target;
+        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +477,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Target.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTarget;
                 @Target.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTarget;
                 @Target.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTarget;
+                @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -482,6 +508,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Target.started += instance.OnTarget;
                 @Target.performed += instance.OnTarget;
                 @Target.canceled += instance.OnTarget;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
         }
     }
@@ -514,5 +543,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDrawWeapon(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnTarget(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

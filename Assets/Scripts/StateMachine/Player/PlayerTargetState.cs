@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class PlayerTargetState : PlayerBaseState
 
     private const float CrossFadeDuration = 0.1f;
 
-    private Vector3 targetMovement;
+    
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         isRootState = true;
@@ -21,10 +22,17 @@ public class PlayerTargetState : PlayerBaseState
 
     public override void Enter()
     {
-       stateMachine.moveDelegate -=  stateMachine.Move;
+        // we want to hande our moves
+        stateMachine.moveDelegate -=  stateMachine.Move;
+        
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
 
-        stateMachine.InputReader.RollEvent += OnDodge;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
+        // press the target button to exit the target mode
+        stateMachine.InputReader.TargetEvent+= OnExitTarget;
+        // we also want to roll
+        stateMachine.InputReader.RollEvent += OnRoll;
+         stateMachine.InputReader.JumpEvent += OnJump;
         
     }
 
@@ -32,8 +40,9 @@ public class PlayerTargetState : PlayerBaseState
       public override void Tick(float deltaTime)
     {
         
-
-        targetMovement = CalculateTargetMovement();
+        // get the target movement
+        Vector3 targetMovement = CalculateTargetMovement();
+        // move and update the player, with the new movements for get a correct targeting mode
         NewMoveTarget(targetMovement * stateMachine.TargetMovementSpeed,deltaTime);
         UpdateAnimator(deltaTime);
         
@@ -44,8 +53,8 @@ public class PlayerTargetState : PlayerBaseState
         
       }
         
-       
-           RotateToTarget();
+        // rotote so the player if always facing the current target;
+        RotateToTarget();
    
       
     }
@@ -55,12 +64,26 @@ public class PlayerTargetState : PlayerBaseState
         
          stateMachine.moveDelegate =  stateMachine.Move;
          stateMachine.IsTargeting = true;
+          stateMachine.InputReader.TargetEvent-= OnExitTarget;
          stateMachine.InputReader.RollEvent -= OnDodge;
+          stateMachine.InputReader.DodgeEvent -= OnRoll;
+           stateMachine.InputReader.JumpEvent -= OnJump;
     }
+
+  
 
     public override void IntiliazeSubState()
     {
        
+    }
+
+    private Vector3 CalculateTargetMovement(){
+       Vector3 movement = new Vector3();
+       movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+       movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+
+       return movement;
+
     }
 
 
@@ -73,11 +96,6 @@ public class PlayerTargetState : PlayerBaseState
 
 
   
-
-    private void UpdateTargeter(){
-
-    }    
-
 
     private void UpdateAnimator(float deltaTime){
        if (stateMachine.InputReader.MovementValue.y == 0)
@@ -105,12 +123,29 @@ public class PlayerTargetState : PlayerBaseState
 
        private void OnDodge(){
         
-      
          stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
-          //stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
-       
-      
+        
     }
+
+
+    private void OnExitTarget()
+    {
+       //press tab again to get out from the ground state;
+       stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+    }
+
+
+      private void OnRoll()
+    {
+       stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
+    }
+
+
+           private void OnJump(){
+        stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+    }
+
+
 
 
  

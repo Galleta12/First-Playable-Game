@@ -50,7 +50,13 @@ public class PlayerRollstate : PlayerBaseState
         if ( remainingRollTime <= 0f)
         {
            
-              stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+            if(stateMachine.Targeters.currentTarget == null){
+               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+               return;
+            }else if(stateMachine.Targeters.currentTarget != null){
+                stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+               return;
+            } 
         } 
     }
 

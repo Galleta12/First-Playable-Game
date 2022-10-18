@@ -13,7 +13,7 @@ public class PlayerStateMachine : StateMachine
 // gameobject weapon
 [field:SerializeField] public WeaponHandler Weapon {get; private set; }
 //for the target data 
-[field:SerializeField] public Targeter Targeters {get; private set; }
+[field:SerializeField] public TargeterDotProduct Targeters {get; private set; }
 
 // the speed of the player
 [field: SerializeField] public float FreeLookMovementSpeed {get; private set; }
@@ -45,6 +45,16 @@ public class PlayerStateMachine : StateMachine
 [field: SerializeField] public float RollTime {get; private set; }
 // the cooldown for the roll
 [field: SerializeField] public float RoolCoolDown {get;set; }
+
+
+// this is the data for the dodge state
+[field: SerializeField] public float DodgeForce {get; private set; }
+//stationary force of the dodge
+[field: SerializeField] public float DodgeStationaryForce {get; private set; }
+
+// how long the chracter will doge
+[field: SerializeField] public float DodgeTime {get; private set; }
+
 // drag for external forces to the player, like the impact
 [field: SerializeField] public float drag{get; private set; }
 
@@ -55,7 +65,9 @@ public Transform MainCameraPlayer {get; private set; }
 
 // all this should be hide on the inspector, the vertical velocity and the currment movement input
 
-public Vector3 currentMovement; 
+
+
+public Vector3 currentMovement;
 // all this data is for the jumping
 [HideInInspector]
 public float verticalVelocity;

@@ -84,7 +84,13 @@ public class PlayerDashState : PlayerBaseState
               return;
             }
 
-              stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+            if(stateMachine.Targeters.currentTarget == null){
+               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+               return;
+            }else if(stateMachine.Targeters.currentTarget != null){
+                stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+               return;
+            }  
         }
 
    

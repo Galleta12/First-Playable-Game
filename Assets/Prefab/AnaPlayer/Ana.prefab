@@ -8251,7 +8251,7 @@ GameObject:
   - component: {fileID: 7275720521878991796}
   - component: {fileID: 4844974419467623617}
   - component: {fileID: 7482593810324444634}
-  - component: {fileID: 8016253616709937657}
+  - component: {fileID: 3810026332512794256}
   m_Layer: 0
   m_Name: Ana
   m_TagString: Player
@@ -8367,7 +8367,9 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 484081168021823608}
   <Animator>k__BackingField: {fileID: 718838804679714436}
   <Weapon>k__BackingField: {fileID: 7275720521878991796}
+  <Targeters>k__BackingField: {fileID: 3810026332512794256}
   <FreeLookMovementSpeed>k__BackingField: 6
+  <TargetMovementSpeed>k__BackingField: 5
   <JumpMoveSpeed>k__BackingField: 4
   <RotationDampSpeed>k__BackingField: 10
   <DashForce>k__BackingField: 1
@@ -8378,6 +8380,9 @@ MonoBehaviour:
   <RollStationaryForce>k__BackingField: 4
   <RollTime>k__BackingField: 0.5
   <RoolCoolDown>k__BackingField: 1
+  <DodgeForce>k__BackingField: 0
+  <DodgeStationaryForce>k__BackingField: 0
+  <DodgeTime>k__BackingField: 0
   <drag>k__BackingField: 0.3
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
@@ -8456,7 +8461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponLogic: {fileID: 1163984548882885134}
---- !u!114 &8016253616709937657
+--- !u!114 &3810026332512794256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8465,13 +8470,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6075963298249893444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041d01500a1eae24b8850672ecfa2686, type: 3}
+  m_Script: {fileID: 11500000, guid: a8ad528f5229c4945a1ee2dc305f5d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <InputReader>k__BackingField: {fileID: 970065660651133203}
   <controller>k__BackingField: {fileID: 484081168021823608}
   SphereRadius: 5
-  <viewAngle>k__BackingField: 171.4
+  <viewAngle>k__BackingField: 176
   <EnemyMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
@@ -8481,6 +8486,7 @@ MonoBehaviour:
   <PlayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 0
+  <threshold>k__BackingField: 0.85
 --- !u!1 &6142404270166905312
 GameObject:
   m_ObjectHideFlags: 0
