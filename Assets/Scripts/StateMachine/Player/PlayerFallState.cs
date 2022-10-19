@@ -16,7 +16,7 @@ public class PlayerFallState : PlayerBaseState
     
     public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        isRootState = true;
+        
     }
 
     public override void Enter()

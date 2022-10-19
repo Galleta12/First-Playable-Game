@@ -24,7 +24,7 @@ public class PlayerGroundState : PlayerBaseState
 
 
     public PlayerGroundState(PlayerStateMachine stateMachine): base (stateMachine){
-      isRootState = true;
+     
       //IntiliazeSubState();
     }
     

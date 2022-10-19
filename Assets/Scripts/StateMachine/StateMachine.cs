@@ -19,23 +19,8 @@ public class StateMachine : MonoBehaviour
     public void SwitchState(State newState){
       
       currentState?.Exit();
-      currentState?.currentSubState?.Exit();
-      
-      newState?.Enter();
-      
-       if(newState.isRootState){
-            currentState = newState;
-          
-          
-            
-       }else if(newState.currentSuperState !=null ){
-                Debug.Log("not root");
-                currentState.currentSuperState.SetSubState(newState);
-       }
-       
-      
-      //currentState?.Enter();
-
+      currentState = newState;
+      currentState?.Enter();
       
     }
 
@@ -46,7 +31,7 @@ public class StateMachine : MonoBehaviour
     {
          CustomUpdate(Time.deltaTime);
         currentState?.Tick(Time.deltaTime);
-        currentState?.currentSubState?.Tick(Time.deltaTime);
+        //currentState?.currentSubState?.Tick(Time.deltaTime);
        
        
     }

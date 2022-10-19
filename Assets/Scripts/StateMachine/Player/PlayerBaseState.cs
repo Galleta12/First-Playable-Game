@@ -36,7 +36,7 @@ public abstract class PlayerBaseState : State
 // protected void SwitchState(PlayerBaseState newState){
 //    Exit();
 //    newState.Enter();
-//    if(isRootState){
+//    if(){
 //      CurrentState.currentstate = newState;
 //    } else if(currentSuperState !=null){
 //     currentSuperState.SetSubState(newState);

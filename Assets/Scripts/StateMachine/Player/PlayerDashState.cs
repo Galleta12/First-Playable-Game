@@ -27,7 +27,7 @@ public class PlayerDashState : PlayerBaseState
     public PlayerDashState(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
        
-       isRootState = true;
+       
       // if the inputs are zero we want to move depending on the mouse direction, otherwise we just move depending on the inputs
       if(currentMotion == Vector3.zero){
              

@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerBaseState
 
 
     public PlayerJumpState(PlayerStateMachine stateMachine): base (stateMachine){
-          isRootState = true;
+          
     }
     public override void Enter()
     {

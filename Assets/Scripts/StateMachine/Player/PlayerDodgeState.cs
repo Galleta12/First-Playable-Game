@@ -25,7 +25,7 @@ public class PlayerDodgeState : PlayerBaseState
     
     public PlayerDodgeState(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
-        isRootState = true;
+       
         if(currentMotion!= Vector3.zero){
            this.DodgeInput = currentMotion;
         }

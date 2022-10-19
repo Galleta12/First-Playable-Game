@@ -51,8 +51,9 @@ public class TargeterDotProduct : MonoBehaviour
 
 private void Start() {
    
+    
     Maincamera  = Camera.main.transform;
-    StartCoroutine("TargetSelection",.2f);
+    StartCoroutine("TargetSelection",.5f);
 
 
 }
@@ -136,6 +137,7 @@ private void selectTarget( Vector3 currentInputs,Transform target, float dist){
     if(target.TryGetComponent<Target>(out Target target1)){
         if(target != currentTarget){
             this.currentTarget = target1;
+            target1.OnDestroyed += SetNullDestroyed;
         }
         
     }
@@ -161,6 +163,18 @@ private void checkIfitExists(){
     if(currentEnemiesList.Count != 0){return;}
     if(currentEnemiesList.Contains(currentTarget.transform)){return;}
     this.currentTarget = null;
+}
+
+
+// this is saved on a event
+//therefore it will trigger is the enemy is dead
+// at the same time we unsubscribe from the event
+private void SetNullDestroyed(Target target1){
+
+   this.currentTarget = null;
+   target1.OnDestroyed -= SetNullDestroyed;
+   
+  
 }
 
 

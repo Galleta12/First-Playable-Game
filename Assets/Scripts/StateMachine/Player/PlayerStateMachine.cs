@@ -55,6 +55,18 @@ public class PlayerStateMachine : StateMachine
 // how long the chracter will doge
 [field: SerializeField] public float DodgeTime {get; private set; }
 
+// data for the roll on target state
+[field: SerializeField] public float RollTargetForce {get; private set; }
+
+[field: SerializeField] public float RollTargetStationaryForce {get; private set; }
+
+[field: SerializeField] public float RollTargetTime {get; private set; }
+
+
+
+
+
+
 // drag for external forces to the player, like the impact
 [field: SerializeField] public float drag{get; private set; }
 

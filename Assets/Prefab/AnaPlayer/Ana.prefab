@@ -8383,6 +8383,9 @@ MonoBehaviour:
   <DodgeForce>k__BackingField: 2
   <DodgeStationaryForce>k__BackingField: 2
   <DodgeTime>k__BackingField: 0.6
+  <RollTargetForce>k__BackingField: 2
+  <RollTargetStationaryForce>k__BackingField: 2
+  <RollTargetTime>k__BackingField: 0.5
   <drag>k__BackingField: 0.3
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
@@ -8475,7 +8478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InputReader>k__BackingField: {fileID: 970065660651133203}
   <controller>k__BackingField: {fileID: 484081168021823608}
-  SphereRadius: 5
+  SphereRadius: 7
   <viewAngle>k__BackingField: 176
   <EnemyMask>k__BackingField:
     serializedVersion: 2
@@ -8486,7 +8489,7 @@ MonoBehaviour:
   <PlayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 0
-  <threshold>k__BackingField: 0.85
+  <threshold>k__BackingField: 0.89
 --- !u!1 &6142404270166905312
 GameObject:
   m_ObjectHideFlags: 0

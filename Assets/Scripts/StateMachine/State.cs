@@ -8,8 +8,7 @@ public abstract class State
   public State currentSubState;
   public State currentSuperState;
 
-  private bool IsRoot = false;
-  public bool isRootState{get{ return IsRoot; } set {IsRoot= value;}}
+
     
 
   public abstract void Enter();

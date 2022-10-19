@@ -15,7 +15,7 @@ public class PlayerRollstate : PlayerBaseState
     
     public PlayerRollstate(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
-     isRootState = true;
+     
    
     
     if(currentMotion == Vector3.zero){

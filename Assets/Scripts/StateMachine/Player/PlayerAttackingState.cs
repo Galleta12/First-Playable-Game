@@ -21,7 +21,7 @@ public class PlayerAttackingState : PlayerBaseState
     private Target currentTargetAttack;
     public PlayerAttackingState(PlayerStateMachine stateMachine, int comboIdx) : base(stateMachine)
     {
-        isRootState = true;
+        
        //this is the way of how we can get the current data of the combo
        this.ComboCurrent = stateMachine.Weapon.selectedWeapon.ComboState[comboIdx];
        // we also want to get the current selected weapon

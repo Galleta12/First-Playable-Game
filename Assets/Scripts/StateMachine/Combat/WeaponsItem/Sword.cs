@@ -21,7 +21,7 @@ private List<Collider> alreadyCollideWith = new List<Collider>();
     // we want to clear the list of the objects that we collide
     // as soon as this object is enable
     alreadyCollideWith.Clear();
-    Debug.Log("Helloda");
+   
    }
 
    

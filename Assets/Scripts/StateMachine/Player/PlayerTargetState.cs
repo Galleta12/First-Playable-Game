@@ -16,7 +16,7 @@ public class PlayerTargetState : PlayerBaseState
     
     public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        isRootState = true;
+       
         
     }
 
@@ -34,6 +34,8 @@ public class PlayerTargetState : PlayerBaseState
        
          stateMachine.InputReader.JumpEvent += OnJump;
          stateMachine.InputReader.DrawEvent += OnDraw;
+
+         stateMachine.InputReader.RollEvent += OnRollTarget;
         
     }
 
@@ -67,13 +69,15 @@ public class PlayerTargetState : PlayerBaseState
         
          stateMachine.moveDelegate =  stateMachine.Move;
          // if we exit this means that the last state was target state
-         stateMachine.IsTargeting = true;
-          stateMachine.InputReader.TargetEvent-= OnExitTarget;
-         stateMachine.InputReader.DodgeEvent -= OnDodge;
-          stateMachine.InputReader.RollEvent -= OnRollTarget;
-           stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.IsTargeting = true;
+        stateMachine.InputReader.TargetEvent-= OnExitTarget;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
+        
+        stateMachine.InputReader.JumpEvent -= OnJump;
 
-           stateMachine.InputReader.DrawEvent -= OnDraw;
+        stateMachine.InputReader.DrawEvent -= OnDraw;
+
+        stateMachine.InputReader.RollEvent -= OnRollTarget;
     }
 
   
@@ -145,7 +149,7 @@ public class PlayerTargetState : PlayerBaseState
       private void OnRollTarget()
     {
        if(stateMachine.coolDownTimeRoll <=0f){
-          stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
+          stateMachine.SwitchState(new PlayerRollTargetState(stateMachine, stateMachine.InputReader.MovementValue));
         }
     }
 

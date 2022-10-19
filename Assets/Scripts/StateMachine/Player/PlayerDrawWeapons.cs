@@ -29,7 +29,7 @@ public class PlayerDrawWeapons : PlayerBaseState
     
     public PlayerDrawWeapons(PlayerStateMachine stateMachine, int keyboardNumber, string deviceName) : base(stateMachine)
     {
-          isRootState = true;
+         
           this.KeyboardNumber = keyboardNumber;
           this.DeviceName = deviceName;
           this.currentWeapon = stateMachine.Weapon.getTypeWeapon(keyboardNumber); 
