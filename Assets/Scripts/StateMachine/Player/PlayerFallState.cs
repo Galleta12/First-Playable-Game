@@ -35,16 +35,18 @@ public class PlayerFallState : PlayerBaseState
        Fall(deltaTime);
       
       // set the inputs   
-      stateMachine.currentMovement.x = CalculateNormalMovement().x;
-        stateMachine.currentMovement.z = CalculateNormalMovement().z;
+     stateMachine.currentMovement.x = CalculateNormalMovement().x;
+    stateMachine.currentMovement.z = CalculateNormalMovement().z;
 
-                stateMachine.currentMovement = stateMachine.currentMovement * stateMachine.JumpMoveSpeed;
+    stateMachine.currentMovement = stateMachine.currentMovement * stateMachine.JumpMoveSpeed;
 
         FaceLookMouse(stateMachine.currentMovement,deltaTime);
         // change state and need to be checked the animations
         if(stateMachine.Controller.isGrounded){
              stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
+      
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+           
         }
       
     }
@@ -74,6 +76,9 @@ public class PlayerFallState : PlayerBaseState
       }
       
     }
+
+
+
 
    
 }

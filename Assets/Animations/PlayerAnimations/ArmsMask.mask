@@ -156,25 +156,25 @@ AvatarMask:
   - m_Path: root/Hips/Spine/Spine01/FastenerFront
     m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/LeftBust
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/RightBust
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodMain01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodMain01/HoodMain02
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodSubCenter
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodSubLeftA01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodSubLeftB01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodSubRightA01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/HoodSubRightB01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/LeftShoulder
     m_Weight: 1
   - m_Path: root/Hips/Spine/Spine01/Spine02/LeftShoulder/LeftArm
@@ -320,10 +320,10 @@ AvatarMask:
   - m_Path: root/Hips/Spine/Spine01/Spine02/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3
     m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/StringLeft01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/StringLeft01/StringLeft02
     m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/StringRight01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: root/Hips/Spine/Spine01/Spine02/StringRight01/StringRight02
     m_Weight: 0

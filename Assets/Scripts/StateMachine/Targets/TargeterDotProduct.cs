@@ -27,7 +27,7 @@ public class TargeterDotProduct : MonoBehaviour
 
 
 
-  private List<Transform> currentEnemiesList =  new List<Transform>();
+  public List<Transform> currentEnemiesList{get;private set;} =  new List<Transform>();
 
   
 

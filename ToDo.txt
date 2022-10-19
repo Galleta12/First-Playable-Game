@@ -1,9 +1,15 @@
 18 of October things to do for the next 3 to 4 days
-the target and selection is improved
-we are doing the selection with the dot product
-the dodge is working fine and the attack as well
-need to work more on the change of state if you are on the target state
-//
+// I dont like at all the draw method
+// I will get rid of it,
 improve the change of state
 do the knockback
-do the inventory
+move the knockback depending on what direction was hit
+kill a target
+do the new draw method, for controller and keyboard
+Scriptable objets?
+do the new ground roll state. However, do it similar to the, dodge state
+// do the ui
+Allow air attack depending on the numbers of hits.
+Allow attack after dashing
+// do the weapon system
+// do the particles and sound effects

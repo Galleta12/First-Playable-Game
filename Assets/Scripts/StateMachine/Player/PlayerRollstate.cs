@@ -16,7 +16,7 @@ public class PlayerRollstate : PlayerBaseState
     public PlayerRollstate(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
      isRootState = true;
-     Debug.Log(currentMotion);
+   
     
     if(currentMotion == Vector3.zero){
         this.RollInput = getMouseDirection() * stateMachine.RollStationaryForce;
@@ -48,15 +48,10 @@ public class PlayerRollstate : PlayerBaseState
        
           
         if ( remainingRollTime <= 0f)
-        {
-           
-            if(stateMachine.Targeters.currentTarget == null){
-               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
-               return;
-            }else if(stateMachine.Targeters.currentTarget != null){
-                stateMachine.SwitchState(new PlayerTargetState(stateMachine));
-               return;
-            } 
+        {  
+        
+            stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+          
         } 
     }
 

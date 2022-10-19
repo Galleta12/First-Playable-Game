@@ -46,7 +46,7 @@ public class PlayerGroundState : PlayerBaseState
         // if we are ground we can double jump again;
         // lets remeber that you can only double jump if you are on the fall or jumping state
         stateMachine.DidITDoubleJump = false;
-
+        // we are seting that the target state is false for now
         stateMachine.IsTargeting = false;
         
     }
@@ -135,12 +135,15 @@ public class PlayerGroundState : PlayerBaseState
 
 
       private void OnTarget(){
-        
+  
+           stateMachine.SwitchState(new PlayerTargetState(stateMachine));
        
-        stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+       
         
       
     }
 
+
+ 
 
 }

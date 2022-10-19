@@ -8380,9 +8380,9 @@ MonoBehaviour:
   <RollStationaryForce>k__BackingField: 4
   <RollTime>k__BackingField: 0.5
   <RoolCoolDown>k__BackingField: 1
-  <DodgeForce>k__BackingField: 0
-  <DodgeStationaryForce>k__BackingField: 0
-  <DodgeTime>k__BackingField: 0
+  <DodgeForce>k__BackingField: 2
+  <DodgeStationaryForce>k__BackingField: 2
+  <DodgeTime>k__BackingField: 0.6
   <drag>k__BackingField: 0.3
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0

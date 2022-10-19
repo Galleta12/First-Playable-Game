@@ -30,9 +30,10 @@ public class PlayerTargetState : PlayerBaseState
         stateMachine.InputReader.DodgeEvent += OnDodge;
         // press the target button to exit the target mode
         stateMachine.InputReader.TargetEvent+= OnExitTarget;
-        // we also want to roll
-        stateMachine.InputReader.RollEvent += OnRoll;
+       
+       
          stateMachine.InputReader.JumpEvent += OnJump;
+         stateMachine.InputReader.DrawEvent += OnDraw;
         
     }
 
@@ -52,7 +53,9 @@ public class PlayerTargetState : PlayerBaseState
         return;
         
       }
-        
+      // we check if there are enemies inside the list of the sphere overlap
+      //if there is not enemies we can get back to ground state
+     
         // rotote so the player if always facing the current target;
         RotateToTarget();
    
@@ -63,11 +66,14 @@ public class PlayerTargetState : PlayerBaseState
     {
         
          stateMachine.moveDelegate =  stateMachine.Move;
+         // if we exit this means that the last state was target state
          stateMachine.IsTargeting = true;
           stateMachine.InputReader.TargetEvent-= OnExitTarget;
-         stateMachine.InputReader.RollEvent -= OnDodge;
-          stateMachine.InputReader.DodgeEvent -= OnRoll;
+         stateMachine.InputReader.DodgeEvent -= OnDodge;
+          stateMachine.InputReader.RollEvent -= OnRollTarget;
            stateMachine.InputReader.JumpEvent -= OnJump;
+
+           stateMachine.InputReader.DrawEvent -= OnDraw;
     }
 
   
@@ -131,19 +137,25 @@ public class PlayerTargetState : PlayerBaseState
     private void OnExitTarget()
     {
        //press tab again to get out from the ground state;
+       //this will already set up target as false, therefore we don't get unexpected behaviours.
        stateMachine.SwitchState(new PlayerGroundState(stateMachine));
     }
 
 
-      private void OnRoll()
+      private void OnRollTarget()
     {
-       stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
+       if(stateMachine.coolDownTimeRoll <=0f){
+          stateMachine.SwitchState(new PlayerRollstate(stateMachine, stateMachine.currentMovement));
+        }
     }
 
 
            private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
+
+
+ 
 
 
 

@@ -55,5 +55,7 @@ public class PlayerDoubleJumpState : PlayerBaseState
           stateMachine.verticalVelocity = stateMachine.intialJumpVelocity * 1.2f;
     }
 
+
+ 
   
 }

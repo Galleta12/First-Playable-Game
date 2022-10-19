@@ -76,13 +76,12 @@ public class PlayerAttackingState : PlayerBaseState
             TryNextCombo(normalizedTime);
          }
         }else{
-            if(stateMachine.Targeters.currentTarget == null){
-               stateMachine.SwitchState(new PlayerGroundState(stateMachine));
-               return;
-            }else if(stateMachine.Targeters.currentTarget != null){
-                stateMachine.SwitchState(new PlayerTargetState(stateMachine));
-               return;
-            }  
+           if(stateMachine.IsTargeting){
+            stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+            return;
+           }else{
+            stateMachine.SwitchState(new PlayerGroundState(stateMachine));
+           }
            
         }
         // need to know more about this, the dampingvelocity is only for this code, but we ensure to smootly go back to zero

@@ -137,7 +137,7 @@ protected void handleCoolDownRoll(float deltaTime){
 
 protected void OnDraw(){
   
-  if(stateMachine.InputReader.MovementValue == Vector2.zero){
+  if(stateMachine.InputReader.MovementValue == Vector2.zero && stateMachine.Controller.isGrounded){
      stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
   }else{
     stateMachine.SwitchState(new PlayerDrawMovement(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
