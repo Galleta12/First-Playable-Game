@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,9 +44,9 @@ public class TargeterDotProduct : MonoBehaviour
     private Vector3 heightPlayer;
 
 
-    //delegates for the selection of target
-    private delegate void SelectionofTarget(bool isdetected, RaycastHit info, Vector3 currentInputs);
-    private SelectionofTarget selectionofTarget;
+    public event Action OnSelectTargetStateMachine;
+
+    public event Action OnSelectClosestTarget;
 
 
 
@@ -53,9 +54,21 @@ private void Start() {
    
     
     Maincamera  = Camera.main.transform;
-    StartCoroutine("TargetSelection",.5f);
+     
+   
+  StartCoroutine("TargetSelection",.2f);
 
 
+}
+
+
+public void playerStartSelectionCouroutine(){
+  
+}
+
+
+public void playerStopSelectionCouroutine(){
+   StopCoroutine("TargetSelection");
 }
 
 
@@ -83,69 +96,125 @@ private IEnumerator TargetSelection(float delay){
 
 private void StartSelectionCourotine() {
   
+  
     currentEnemiesList.Clear();
 
     // the sphere collider
-    Collider [] hitCollider = Physics.OverlapSphere(transform.position,SphereRadius,EnemyMask);
-     // get the height and center of the player
-   
-    centerPlayer = new Vector3(transform.position.x,transform.position.y+(controller.height/2),transform.position.z);
-    heightPlayer = new Vector3(transform.position.x,transform.position.y+(controller.height),transform.position.z);
-    inputs = GetCurrentInputs().normalized;
-   
-        for(int i =0;i<hitCollider.Length;i++){
+     List<Collider> hitCollider = new List<Collider>(Physics.OverlapSphere(transform.position,SphereRadius,EnemyMask));
+    //check if we have hit a collider on the enemy layer, if is zero we assume the target is null
+    if(hitCollider.Count == 0){
+        setTargertNull();
+        return;
+    }else if(currentTarget != null &&!hitCollider.Contains(currentTarget.GetComponent<Collider>())){
+        setTargertNull();
+         return;
+    }
+ 
+         for(int i =0;i<hitCollider.Count;i++){
            
           Transform target = hitCollider[i].transform;
           Vector3 direction = (target.position-transform.position).normalized;
           
           if(Vector3.Angle(transform.forward,direction)< viewAngle){
+        heightPlayer = new Vector3(transform.position.x,transform.position.y+controller.height,transform.position.z);
            float dist = Vector3.Distance(transform.position,target.position);
-            selectTarget(inputs,target,dist);
-            currentEnemiesList.Add(target);      
+           bool isDetectedAnEnemyAvoidingObtacles = Physics.Raycast(heightPlayer,direction,dist,ObstacleMask);
+           if(!isDetectedAnEnemyAvoidingObtacles){
+                currentEnemiesList.Add(target);      
+           }
+            
+            
              
           }
         
         }
 
-   checkIfitExists();
+}
+
+
+public void setTargertNull(){
+  this.currentTarget = null; 
+}
+
+
+
+
+
+
+
+public void setTheClosestTarget(){
+    Transform newTarget = selectClosetTarget();
+    if(newTarget==null){return;}
+    //get the target component
+    if(newTarget.TryGetComponent<Target>(out Target target)){
+        this.currentTarget = target;
+        target.OnDestroyed += SetNullDestroyed;
+    }
+}
+
+
+
+
+// this will be call on the statemachine target of the player if tab is pressed.
+private Transform selectClosetTarget(){
+
+if(currentEnemiesList == null){return null;}
+
+Transform currentClosestTarget = null;
+float shortdistance = Mathf.Infinity;
+
+foreach(Transform enemy in currentEnemiesList){
+      float currentdistance = Vector3.Distance(transform.position,enemy.position);
+      if(currentdistance < shortdistance){
+           currentClosestTarget = enemy;
+           shortdistance = currentdistance;
+      }
+}
+
+return currentClosestTarget;
+    
 
 }
 
-// we need to keep track of the closest selectable
 
-private void selectTarget( Vector3 currentInputs,Transform target, float dist){
+
+
+
+// we need to keep track of the select target
+
+// private void selectTarget( Vector3 currentInputs,Transform target, float dist){
   
-  //RaycastHit info;
+//   //RaycastHit info;
  
 
-  Ray [] currentRay = CreateRay(currentInputs); 
-   // this is for the center of the player ray
-  Vector3 vector1 = currentRay[0].direction;
-  Vector3 vector2= target.position - currentRay[0].origin;
-  // this is the height of the ray
-  Vector3 vector3 = currentRay[1].direction;
-  Vector3 vector4 = target.position - currentRay[1].origin;
+//   Ray [] currentRay = CreateRay(currentInputs); 
+//    // this is for the center of the player ray
+//   Vector3 vector1 = currentRay[0].direction;
+//   Vector3 vector2= target.position - currentRay[0].origin;
+//   // this is the height of the ray
+//   Vector3 vector3 = currentRay[1].direction;
+//   Vector3 vector4 = target.position - currentRay[1].origin;
 
-  float lookPecentagecenter = Vector3.Dot(vector1.normalized,vector2.normalized);
-  float lookPecentageheight = Vector3.Dot(vector3.normalized,vector4.normalized);
-  //bool sphereCast = Physics.Raycast(centerPlayer,currentInputs,out info,dist,EnemyMask);
+//   float lookPecentagecenter = Vector3.Dot(vector1.normalized,vector2.normalized);
+//   float lookPecentageheight = Vector3.Dot(vector3.normalized,vector4.normalized);
+//   //bool sphereCast = Physics.Raycast(centerPlayer,currentInputs,out info,dist,EnemyMask);
   
-  
-  if(lookPecentagecenter > threshold || lookPecentageheight > threshold){
-   //closest = lookPecentage;
+//   //check if the look percentage is greate, if it is we can set up the target.
+//   if(lookPecentagecenter > threshold || lookPecentageheight > threshold){
+//    //closest = lookPecentage;
     
-    if(target.TryGetComponent<Target>(out Target target1)){
-        if(target != currentTarget){
-            this.currentTarget = target1;
-            target1.OnDestroyed += SetNullDestroyed;
-        }
+//     if(target.TryGetComponent<Target>(out Target target1)){
+//         if(target != currentTarget){
+//             this.currentTarget = target1;
+//             target1.OnDestroyed += SetNullDestroyed;
+//         }
         
-    }
+//     }
    
-  }
+//   }
   
 
-}
+// }
 
 
 private Ray[] CreateRay(Vector3 inputs){
@@ -158,12 +227,13 @@ private Ray[] CreateRay(Vector3 inputs){
 }
 
 
-private void checkIfitExists(){
-    if(currentTarget == null){return;}
-    if(currentEnemiesList.Count != 0){return;}
-    if(currentEnemiesList.Contains(currentTarget.transform)){return;}
-    this.currentTarget = null;
-}
+// private void checkIfitExists(){
+  
+//     if(currentTarget == null){return;}
+//     if(currentEnemiesList.Count == 0){return;}
+//     if(currentEnemiesList.Contains(currentTarget.transform)){return;}
+//     this.currentTarget = null;
+// }
 
 
 // this is saved on a event
@@ -222,8 +292,8 @@ private void OnDrawGizmosSelected() {
      Gizmos.color = Color.red;
     
     
-     Gizmos.DrawRay(centerPlayer,inputs );
-     Gizmos.DrawRay(heightPlayer,inputs );
+     Gizmos.DrawRay(centerPlayer,inputs);
+     Gizmos.DrawRay(heightPlayer,inputs);
     
     
 

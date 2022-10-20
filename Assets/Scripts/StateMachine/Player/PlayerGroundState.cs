@@ -136,7 +136,7 @@ public class PlayerGroundState : PlayerBaseState
 
       private void OnTarget(){
   
-           stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+           stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
        
        
         

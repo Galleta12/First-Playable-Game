@@ -51,14 +51,24 @@ public class PlayerAttackingState : PlayerBaseState
     
     public override void Tick(float deltaTime)
     {
-     
+        
        
-        //move the character taking into count the impulse force
-        MoveAttack(deltaTime);    
+
+       if(currentTargetAttack == null){
+         this.currentInput = CalculateNormalMovement() * 2f;
+         SetRotation(currentInput,deltaTime);
+        
+       }
+
+          
         //check if we should rotate
-        if(currentTargetAttack !=null){
+        if(currentTargetAttack !=null && stateMachine.IsTargeting){
          RotateToTarget();
+
         }
+
+        //move the character taking into count the impulse force
+        MoveAttack(deltaTime);  
         
         float normalizedTime = GetNormalizedTime(stateMachine.Animator);
         // this means that we are on an animation if is greater than 1 we are not doing nothing therefore we can change the state
@@ -77,7 +87,7 @@ public class PlayerAttackingState : PlayerBaseState
          }
         }else{
            if(stateMachine.IsTargeting){
-            stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+            stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
             return;
            }else{
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));
@@ -174,6 +184,17 @@ private void setDamageWeapon(){
        private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
+
+
+    private void SetRotation(Vector3 direction,float deltaTime){
+    if(direction == Vector3.zero){return;}
+    stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation,
+    Quaternion.LookRotation(direction),
+    deltaTime * stateMachine.RotationDampSpeed
+    );
+
+
+}
 
 
 

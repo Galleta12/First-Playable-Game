@@ -1,6 +1,10 @@
-19 of October things to do for the next 3 to 4 days
+20 of October things to do for the next 3 to 4 days
 // I dont like at all the draw method
 // I will get rid of it,
+the target has been improved
+if you press tab multiple times you can change target to the closest one
+now I will work on the selection of target with inputs while pressing
+the target button
 do the knockback
 move the knockback depending on what direction was hit
 do the new draw method, for controller and keyboard

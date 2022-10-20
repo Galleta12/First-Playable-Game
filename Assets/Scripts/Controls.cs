@@ -96,7 +96,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""id"": ""27ad766b-ab76-45c2-9b81-633d82a6476b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -106,6 +106,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OnCancelTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""485527ae-5270-4c94-94a2-0ae0e0a92990"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetSelectorPlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""019c212f-20c4-4be6-8c0b-2ddf9ca0c75f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -318,6 +336,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ac34dcd-cd73-49ae-9ab6-4278897305c3"",
+                    ""path"": ""<Keyboard>/capsLock"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""OnCancelTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d53c5210-0a75-42a9-9fcb-9cf537d857bd"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""TargetSelectorPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -363,6 +403,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+        m_Player_OnCancelTarget = m_Player.FindAction("OnCancelTarget", throwIfNotFound: true);
+        m_Player_TargetSelectorPlayer = m_Player.FindAction("TargetSelectorPlayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,6 +473,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Target;
     private readonly InputAction m_Player_Dodge;
+    private readonly InputAction m_Player_OnCancelTarget;
+    private readonly InputAction m_Player_TargetSelectorPlayer;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -444,6 +488,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Target => m_Wrapper.m_Player_Target;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+        public InputAction @OnCancelTarget => m_Wrapper.m_Player_OnCancelTarget;
+        public InputAction @TargetSelectorPlayer => m_Wrapper.m_Player_TargetSelectorPlayer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -480,6 +526,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @OnCancelTarget.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnCancelTarget;
+                @OnCancelTarget.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnCancelTarget;
+                @OnCancelTarget.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOnCancelTarget;
+                @TargetSelectorPlayer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
+                @TargetSelectorPlayer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
+                @TargetSelectorPlayer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -511,6 +563,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @OnCancelTarget.started += instance.OnOnCancelTarget;
+                @OnCancelTarget.performed += instance.OnOnCancelTarget;
+                @OnCancelTarget.canceled += instance.OnOnCancelTarget;
+                @TargetSelectorPlayer.started += instance.OnTargetSelectorPlayer;
+                @TargetSelectorPlayer.performed += instance.OnTargetSelectorPlayer;
+                @TargetSelectorPlayer.canceled += instance.OnTargetSelectorPlayer;
             }
         }
     }
@@ -544,5 +602,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnTarget(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnOnCancelTarget(InputAction.CallbackContext context);
+        void OnTargetSelectorPlayer(InputAction.CallbackContext context);
     }
 }

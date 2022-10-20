@@ -71,7 +71,7 @@ public class PlayerDodgeState : PlayerBaseState
         if ( remainingDodgeTime <= 0f)
         {
            
-              stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+              stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
         } 
     }
     

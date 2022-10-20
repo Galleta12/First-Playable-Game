@@ -74,7 +74,7 @@
                     "id": "27ad766b-ab76-45c2-9b81-633d82a6476b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -84,6 +84,24 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OnCancelTarget",
+                    "type": "Button",
+                    "id": "485527ae-5270-4c94-94a2-0ae0e0a92990",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TargetSelectorPlayer",
+                    "type": "Button",
+                    "id": "019c212f-20c4-4be6-8c0b-2ddf9ca0c75f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -294,6 +312,28 @@
                     "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ac34dcd-cd73-49ae-9ab6-4278897305c3",
+                    "path": "<Keyboard>/capsLock",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "OnCancelTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d53c5210-0a75-42a9-9fcb-9cf537d857bd",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "TargetSelectorPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

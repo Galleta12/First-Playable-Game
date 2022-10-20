@@ -52,7 +52,7 @@ public class PlayerDrawMovement : PlayerBaseState
     
        if(!GetStateOfAnimationNewLayer(stateMachine.Animator,currentWeapon.WeaponAnimationDrawNameMovement)){
           if(stateMachine.IsTargeting && stateMachine.Targeters.currentTarget != null){
-            stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+            stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
             return;
            }else{
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));

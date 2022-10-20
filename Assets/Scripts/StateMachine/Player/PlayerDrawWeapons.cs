@@ -63,7 +63,7 @@ public class PlayerDrawWeapons : PlayerBaseState
          
          if(stateMachine.Controller.isGrounded){
            if(stateMachine.IsTargeting && stateMachine.Targeters.currentTarget != null){
-            stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+            stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
             return;
            }else{
             stateMachine.SwitchState(new PlayerGroundState(stateMachine));

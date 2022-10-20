@@ -14,9 +14,17 @@ public class PlayerTargetState : PlayerBaseState
     private const float CrossFadeDuration = 0.1f;
 
     
-    public PlayerTargetState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerTargetState(PlayerStateMachine stateMachine, bool shouldChangeTarget) : base(stateMachine)
     {
-       
+       // call the set target to select the closest target
+       // everytime that we change of state this will be called
+       if(shouldChangeTarget){
+         stateMachine.Targeters.setTheClosestTarget();
+       }
+       else if(stateMachine.Targeters.currentTarget == null){
+         stateMachine.Targeters.setTheClosestTarget();
+       }
+      
         
     }
 
@@ -29,7 +37,9 @@ public class PlayerTargetState : PlayerBaseState
 
         stateMachine.InputReader.DodgeEvent += OnDodge;
         // press the target button to exit the target mode
-        stateMachine.InputReader.TargetEvent+= OnExitTarget;
+        stateMachine.InputReader.CancelTargetEvent+= OnExitTarget;
+
+        stateMachine.InputReader.TargetEvent+= ChangeTarget;
        
        
          stateMachine.InputReader.JumpEvent += OnJump;
@@ -55,6 +65,16 @@ public class PlayerTargetState : PlayerBaseState
         return;
         
       }
+     
+      if(stateMachine.Targeters.currentTarget == null){
+         stateMachine.Targeters.setTheClosestTarget();
+         //here I need to do a courotine in order to check if the targets is null;
+      }
+      
+     
+      
+
+      
       // we check if there are enemies inside the list of the sphere overlap
       //if there is not enemies we can get back to ground state
      
@@ -70,7 +90,9 @@ public class PlayerTargetState : PlayerBaseState
          stateMachine.moveDelegate =  stateMachine.Move;
          // if we exit this means that the last state was target state
         stateMachine.IsTargeting = true;
-        stateMachine.InputReader.TargetEvent-= OnExitTarget;
+        
+        stateMachine.InputReader.CancelTargetEvent-= OnExitTarget;
+        
         stateMachine.InputReader.DodgeEvent -= OnDodge;
         
         stateMachine.InputReader.JumpEvent -= OnJump;
@@ -78,6 +100,8 @@ public class PlayerTargetState : PlayerBaseState
         stateMachine.InputReader.DrawEvent -= OnDraw;
 
         stateMachine.InputReader.RollEvent -= OnRollTarget;
+
+         stateMachine.InputReader.TargetEvent-= ChangeTarget;
     }
 
   
@@ -156,6 +180,11 @@ public class PlayerTargetState : PlayerBaseState
 
            private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+    }
+
+
+    private void ChangeTarget(){
+      stateMachine.SwitchState(new PlayerTargetState(stateMachine,true));
     }
 
 

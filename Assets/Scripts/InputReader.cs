@@ -24,6 +24,9 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     public bool  isAttacking {get; private set;}
 
 
+    public bool  isTargeting {get; private set;}
+
+
     public event Action JumpEvent;
 
 
@@ -35,6 +38,8 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     public event Action TargetEvent;
 
     public event Action DodgeEvent;
+
+    public event Action CancelTargetEvent;
 
 
 
@@ -100,6 +105,7 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     public void OnTarget(InputAction.CallbackContext context)
     {
        if(!context.performed){return;}
+         Debug.Log("This is for the target event trigger");
        TargetEvent?.Invoke();
     }
 
@@ -107,5 +113,23 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
         if(!context.performed){return;}
         DodgeEvent?.Invoke();
+    }
+
+    public void OnOnCancelTarget(InputAction.CallbackContext context)
+    {
+       if(!context.performed){return;}
+       CancelTargetEvent?.Invoke();
+    }
+
+    public void OnTargetSelectorPlayer(InputAction.CallbackContext context)
+    {
+        
+         if(context.performed){
+            Debug.Log("This is for the target");
+            isTargeting = true;
+        }else if(!context.performed){
+            isTargeting =false;
+             Debug.Log("This is for the target false");
+        }
     }
 }

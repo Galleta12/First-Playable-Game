@@ -51,7 +51,7 @@ public class PlayerRollTargetState : PlayerBaseState
         if (  remainingRollTargetTime <= 0f)
         {  
         
-            stateMachine.SwitchState(new PlayerTargetState(stateMachine));
+            stateMachine.SwitchState(new PlayerTargetState(stateMachine,false));
           
         } 
     }
