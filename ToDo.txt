@@ -5,6 +5,11 @@ the target has been improved
 if you press tab multiple times you can change target to the closest one
 now I will work on the selection of target with inputs while pressing
 the target button
+// the target has been improved
+// next step is to dont allow movement when pressing the movement values in order to select a new target
+// I will do this tomorrow, maybe create a new child class, that will only instiate, when I want to create
+a new target movement
+
 do the knockback
 move the knockback depending on what direction was hit
 do the new draw method, for controller and keyboard

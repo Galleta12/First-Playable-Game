@@ -10,7 +10,7 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
 
     private Controls controls;
-
+    
     public Vector2 MovementValue {get; private set;}
 
     private  String KeyBoardNumber ;

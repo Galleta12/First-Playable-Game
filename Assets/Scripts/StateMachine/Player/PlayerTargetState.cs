@@ -46,6 +46,7 @@ public class PlayerTargetState : PlayerBaseState
          stateMachine.InputReader.DrawEvent += OnDraw;
 
          stateMachine.InputReader.RollEvent += OnRollTarget;
+         
         
     }
 
@@ -59,7 +60,10 @@ public class PlayerTargetState : PlayerBaseState
         NewMoveTarget(targetMovement * stateMachine.TargetMovementSpeed,deltaTime);
         UpdateAnimator(deltaTime);
         
-        if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
+      
+      checkpossibleChangeofState();
+      
+      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
      
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine,0));
         return;
@@ -83,6 +87,8 @@ public class PlayerTargetState : PlayerBaseState
    
       
     }
+
+
 
     public override void Exit()
     {
@@ -110,6 +116,9 @@ public class PlayerTargetState : PlayerBaseState
     {
        
     }
+
+
+  
 
     private Vector3 CalculateTargetMovement(){
        Vector3 movement = new Vector3();
@@ -186,14 +195,86 @@ public class PlayerTargetState : PlayerBaseState
     private void ChangeTarget(){
       stateMachine.SwitchState(new PlayerTargetState(stateMachine,true));
     }
+      private void checkpossibleChangeofState(){
+     
+      if(stateMachine.InputReader.isTargeting){
+       selectNewTargetInput();
+      }
+    }
 
 
- 
+    private void selectNewTargetInput(){
+      
+      //get the inputs
+      // get the height and center of the player
+      Vector3 height= new Vector3(stateMachine.transform.position.x,stateMachine.transform.position.y + 
+      stateMachine.Controller.height,stateMachine.transform.position.z);
+      Vector3 center= new Vector3(stateMachine.transform.position.x,stateMachine.transform.position.y + 
+      (stateMachine.Controller.height/2),stateMachine.transform.position.z);
+      Vector3 newCurrentInputs = currentInputs().normalized;
+      //the position to pass as an argument
+      Vector3 [] position = new Vector3[2];
+      position[0]=height;
+      position[1]=center;
+      
+      for(int i = 0; i < stateMachine.Targeters.currentEnemiesList.Count;i++){
+           Transform targets = stateMachine.Targeters.currentEnemiesList[i];
+           float dist = Vector3.Distance(stateMachine.transform.position,targets.position);
+           setTheNewTarget(newCurrentInputs,targets,dist,position);
+      }
+    }
+
+
+    private void setTheNewTarget(Vector3 motion,Transform tar, float dist,Vector3[] positions){
+      
+      Debug.Log("This is being call");
+     
+      Ray [] currentRay= CreateRay(motion,positions[0],positions[1]);
+      // inputs relative to the heigh position
+      // we get to vectors direction
+      Vector3 vector1 = currentRay[0].direction;
+      Vector3 vector2= tar.position - currentRay[0].origin;
+      // the same for the center
+      Vector3 vector3 = currentRay[1].direction;
+      Vector3 vector4= tar.position - currentRay[1].origin;
+
+      // get the dot product with the normals
+      // the values are between 1 and -1
+      float lookPercentageHeight = Vector3.Dot(vector1.normalized,vector2.normalized);
+      float lookPercentageCenter = Vector3.Dot(vector3.normalized,vector4.normalized);
+       //check if the look percentage is greate, if it is we can set up the target.
+       if(lookPercentageHeight > stateMachine.Targeters.threshold || 
+       lookPercentageCenter > stateMachine.Targeters.threshold){
+           //therefore if this condition is true we can set up the new target
+           stateMachine.Targeters.setNewTarget(tar);
+       }
+    }
+
+    //create an ray relative to the inputs of the player
+    private Ray[] CreateRay(Vector3 inputs, Vector3 height, Vector3 center){
+      Ray [] ray = new Ray[2];
+      ray[0] = new Ray(height,inputs);
+      ray[1] = new Ray(center,inputs);
+      return ray;
+
+    }
 
 
 
+    private Vector3 currentInputs(){
+       Vector3 camera_z = stateMachine.MainCameraPlayer.forward;
+       Vector3 camera_x = stateMachine.MainCameraPlayer.right;
+       camera_z.y = 0f;
+       camera_x.y = 0f;
+       camera_z.Normalize();
+       camera_x.Normalize();
+       return stateMachine.InputReader.MovementValue.x * camera_x + 
+       stateMachine.InputReader.MovementValue.y * camera_z;
+    }
+    
 
- 
 
   
 }
+
+

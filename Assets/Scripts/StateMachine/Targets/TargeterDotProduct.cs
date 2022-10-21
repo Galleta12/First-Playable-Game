@@ -36,17 +36,13 @@ public class TargeterDotProduct : MonoBehaviour
     public Transform Maincamera {get; private set; }
 
    
-   // the inputs relative to the camera
-    private Vector3 inputs;
-
+ 
     private Vector3 centerPlayer;
 
     private Vector3 heightPlayer;
 
 
-    public event Action OnSelectTargetStateMachine;
 
-    public event Action OnSelectClosestTarget;
 
 
 
@@ -146,10 +142,20 @@ public void setTheClosestTarget(){
     Transform newTarget = selectClosetTarget();
     if(newTarget==null){return;}
     //get the target component
-    if(newTarget.TryGetComponent<Target>(out Target target)){
+    setNewTarget(newTarget);
+    
+    
+}
+
+
+public void setNewTarget(Transform targets){
+     
+    if(targets.TryGetComponent<Target>(out Target target)){
+      
         this.currentTarget = target;
         target.OnDestroyed += SetNullDestroyed;
     }
+
 }
 
 
@@ -217,14 +223,14 @@ return currentClosestTarget;
 // }
 
 
-private Ray[] CreateRay(Vector3 inputs){
+// private Ray[] CreateRay(Vector3 inputs){
 
-    Ray [] ray = new Ray[2];
-    ray[0]=new Ray(centerPlayer,inputs);
-    ray[1]=new Ray(heightPlayer,inputs);
+//     Ray [] ray = new Ray[2];
+//     ray[0]=new Ray(centerPlayer,inputs);
+//     ray[1]=new Ray(heightPlayer,inputs);
     
-    return ray;
-}
+//     return ray;
+// }
 
 
 // private void checkIfitExists(){
@@ -250,20 +256,20 @@ private void SetNullDestroyed(Target target1){
 
 
 
-private Vector3 GetCurrentInputs(){
-   Vector3 cameraForward =  Maincamera.forward;
-   Vector3 cameraRight = Maincamera.right;
-    cameraForward.y = 0f;
-    cameraRight.y = 0f;
+// private Vector3 GetCurrentInputs(){
+//    Vector3 cameraForward =  Maincamera.forward;
+//    Vector3 cameraRight = Maincamera.right;
+//     cameraForward.y = 0f;
+//     cameraRight.y = 0f;
 
-   cameraForward.Normalize();
-   cameraRight.Normalize();
-// read more about the movement relative the camera
-   return InputReader.MovementValue.x * cameraRight + 
-   InputReader.MovementValue.y  * cameraForward;
+//    cameraForward.Normalize();
+//    cameraRight.Normalize();
+// // read more about the movement relative the camera
+//    return InputReader.MovementValue.x * cameraRight + 
+//    InputReader.MovementValue.y  * cameraForward;
 
 
-}
+// }
 
 // need to read more about bool
 public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) {
@@ -289,11 +295,11 @@ private void OnDrawGizmosSelected() {
     Gizmos.DrawLine(transform.position, transform.position + viewAngleB * SphereRadius);
 
      
-     Gizmos.color = Color.red;
+    //  Gizmos.color = Color.red;
     
     
-     Gizmos.DrawRay(centerPlayer,inputs);
-     Gizmos.DrawRay(heightPlayer,inputs);
+    //  Gizmos.DrawRay(centerPlayer,inputs);
+    //  Gizmos.DrawRay(heightPlayer,inputs);
     
     
 
