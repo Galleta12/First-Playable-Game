@@ -12,6 +12,8 @@ public class Sword : MonoBehaviour
 private List<Collider> alreadyCollideWith = new List<Collider>();
 
  private int damage;
+ //this is for the knockback of the sword
+ private float knockback;
 
 
    
@@ -32,16 +34,22 @@ private List<Collider> alreadyCollideWith = new List<Collider>();
     //it means that we already hit it, therefore we dont want to do anything
     if(alreadyCollideWith.Contains(other)){return;}
     alreadyCollideWith.Add(other);
-    Debug.Log(other.gameObject.name);
+    //Debug.Log(other.gameObject.name);
     // we want to get the health component of the object that we collide with
     if(other.TryGetComponent<Health>(out Health health)){
-        health.DealDamage(damage);
-        // Debug.Log(health.currentHealth);
+       // we want to pass the damage and the knockback, therefore we can hanlde the impact state
+        // we pass the direction for the knockback
+        Vector3 direction = (other.transform.position - mycharacterController.transform.position).normalized;
+        
+        health.DealDamage(damage,direction * knockback);
+        
     }
+    
    }
 
-
-   public void SetAttack(int damage){
+    // with this we set the attack damage
+   public void SetAttack(int damage, float knockback){
     this.damage = damage;
+    this.knockback = knockback;
    }
 }

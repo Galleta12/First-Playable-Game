@@ -68,12 +68,9 @@ private void Update() {
             }else{
                 enemyDected = false;
             }
-         
                   
                   currentEnemies.Add(hit);
-                  //Debug.Log(hit.gameObject.name);
-                   
-               
+                  //Debug.Log(hit.gameObject.name);     
     }
 
      checkerHash = new List<Collider>(currentEnemies);

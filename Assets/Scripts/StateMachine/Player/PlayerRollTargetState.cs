@@ -15,9 +15,9 @@ public class PlayerRollTargetState : PlayerBaseState
     public PlayerRollTargetState(PlayerStateMachine stateMachine, Vector3 currentInputs) : base(stateMachine)
     {
         
-        if(currentInputs != Vector3.zero){
+       
             this.RollInput =currentInputs;
-        }
+        
 
     }
 
@@ -30,18 +30,13 @@ public class PlayerRollTargetState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-       if(RollInput != Vector3.zero){
+       
+          // we get the current direction for the movemnt for the roll
           Vector3 rollmove = new Vector3();
-          // it should work please
           rollmove+= stateMachine.transform.right * RollInput.x * stateMachine.RollTargetForce/stateMachine.RollTargetTime;
           rollmove+= stateMachine.transform.forward * RollInput.y * stateMachine.RollTargetForce/stateMachine.RollTargetTime;
-           NewMoveTargetRoll(  rollmove,deltaTime);
-       }else{
-           Vector3 rollmoveMouse = new Vector3(); 
-            rollmoveMouse+= stateMachine.transform.right * getMouseDirection().x * stateMachine.DodgeForce/stateMachine.RollTargetTime;
-            rollmoveMouse+= stateMachine.transform.forward *  getMouseDirection().z * stateMachine.DodgeForce/stateMachine.RollTargetTime;
-            NewMoveTargetRoll( rollmoveMouse,deltaTime);
-       }
+        NewMoveTargetRoll(rollmove,deltaTime);
+       
 
          RotateToTarget();
 
@@ -66,21 +61,7 @@ public class PlayerRollTargetState : PlayerBaseState
         
     }
 
-    // where the mouse is looking
-    private Vector3 getMouseDirection()
-    {
-        Vector3 camera_z = stateMachine.MainCameraPlayer.forward;
-      
-        camera_z.y =0f;
-        
-        camera_z.Normalize();
-       
-        
-        
-        return camera_z;
-
-       
-    }
+  
 
 
     private void NewMoveTargetRoll(Vector3 motion, float deltaTime){

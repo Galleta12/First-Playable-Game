@@ -1102,6 +1102,18 @@ PrefabInstance:
       propertyPath: <WeaponsDatas>k__BackingField.Array.data[0].<WeaponColliderScript>k__BackingField
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7275720521878991796, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
+      propertyPath: <WeaponsDatas>k__BackingField.Array.data[0].<ComboState>k__BackingField.Array.data[0].<Knockback>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275720521878991796, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
+      propertyPath: <WeaponsDatas>k__BackingField.Array.data[0].<ComboState>k__BackingField.Array.data[1].<Knockback>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275720521878991796, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
+      propertyPath: <WeaponsDatas>k__BackingField.Array.data[0].<ComboState>k__BackingField.Array.data[2].<Knockback>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7354485349363557079, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.016541524
@@ -1261,6 +1273,7 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 855333540}
   <Health>k__BackingField: {fileID: 855333539}
   <Target>k__BackingField: {fileID: 855333538}
+  <drag>k__BackingField: 0.3
 --- !u!4 &979927484 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6002636724149414604, guid: 4cbbd812d913b794da3f61bfe33124b1, type: 3}
@@ -1335,7 +1348,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007845867}
-  m_LocalRotation: {x: 0.5356075, y: 0.001659519, z: -0.0010525613, w: 0.8444648}
+  m_LocalRotation: {x: 0.5356075, y: 0.0016594869, z: -0.001052541, w: 0.8444648}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1965,7 +1978,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554302828}
-  m_LocalRotation: {x: 0.5508793, y: 0.0016401191, z: -0.0010825864, w: 0.8345826}
+  m_LocalRotation: {x: 0.5508793, y: 0.0016400471, z: -0.0010825387, w: 0.8345826}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2025,6 +2038,7 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 1558789604}
   <Health>k__BackingField: {fileID: 1558789603}
   <Target>k__BackingField: {fileID: 1558789602}
+  <drag>k__BackingField: 0.3
 --- !u!1 &1629367729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8174682565974705822, guid: f4073bdfad655aa41b492c959d628f6b, type: 3}
@@ -2076,6 +2090,7 @@ MonoBehaviour:
   <Controller>k__BackingField: {fileID: 1629367732}
   <Health>k__BackingField: {fileID: 1629367731}
   <Target>k__BackingField: {fileID: 1629367730}
+  <drag>k__BackingField: 0.3
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2177,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.55087924, y: 0.0016401194, z: -0.0010825864, w: 0.8345827}
+  m_LocalRotation: {x: 0.55087924, y: 0.0016400472, z: -0.0010825387, w: 0.8345827}
   m_LocalPosition: {x: -21.543459, y: 11.421, z: 389.674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

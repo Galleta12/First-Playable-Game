@@ -26,9 +26,9 @@ public class PlayerDodgeState : PlayerBaseState
     public PlayerDodgeState(PlayerStateMachine stateMachine, Vector3 currentMotion) : base(stateMachine)
     {
        
-        if(currentMotion!= Vector3.zero){
+     
            this.DodgeInput = currentMotion;
-        }
+        
        
     }
 
@@ -49,18 +49,12 @@ public class PlayerDodgeState : PlayerBaseState
      public override void Tick(float deltaTime)
     {
         
-        if(DodgeInput !=Vector3.zero){
+       
              // get the movement regarding the current motion passed on the constructor
             Vector3 dodgemove = new Vector3(); 
             dodgemove+= stateMachine.transform.right * DodgeInput.x * stateMachine.DodgeForce/stateMachine.DodgeTime;
             dodgemove+= stateMachine.transform.forward * DodgeInput.y * stateMachine.DodgeForce/stateMachine.DodgeTime;
             NewMoveTargetDodge( dodgemove,deltaTime);
-        }else{
-            Vector3 dodgeMousedirection = new Vector3();
-            dodgeMousedirection += stateMachine.transform.right * getMouseDirection().x * stateMachine.DodgeForce/stateMachine.DodgeTime;
-             dodgeMousedirection += stateMachine.transform.forward * getMouseDirection().z * stateMachine.DodgeForce/stateMachine.DodgeTime;
-             NewMoveTargetDodge(dodgeMousedirection,deltaTime);
-        }
         
         
         RotateToTarget();
@@ -87,24 +81,8 @@ public class PlayerDodgeState : PlayerBaseState
        
     }
 
-    // if if not moving we want to move depending on the mouse direction
-    private Vector3 getMouseDirection()
-    {
-        Vector3 camera_z = stateMachine.MainCameraPlayer.forward;
-      
-        camera_z.y =0f;
-        
-        camera_z.Normalize();
-       
-        
-        
-        return camera_z;
-
-       
-    }
 
 
-   
 
      // this will handle the target move
       private void NewMoveTargetDodge(Vector3 motion, float deltaTime){

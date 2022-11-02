@@ -43,7 +43,7 @@ public class PlayerAttackingState : PlayerBaseState
          
          stateMachine.InputReader.DodgeEvent += OnDodge;
 
-          stateMachine.InputReader.RollEvent += OnRoll;
+          stateMachine.InputReader.RollEvent += OnRollTarget;
 
        
     }
@@ -53,7 +53,7 @@ public class PlayerAttackingState : PlayerBaseState
     {
         
        
-
+      // this is for the movemtn if it is without a target
        if(currentTargetAttack == null){
          this.currentInput = CalculateNormalMovement() * 2f;
          SetRotation(currentInput,deltaTime);
@@ -108,7 +108,7 @@ public class PlayerAttackingState : PlayerBaseState
 
         stateMachine.InputReader.DodgeEvent -= OnDodge;
 
-        stateMachine.InputReader.RollEvent -= OnRoll;
+        stateMachine.InputReader.RollEvent -= OnRollTarget;
 
         stateMachine.InputReader.JumpEvent -= OnJump;
     }
@@ -161,27 +161,35 @@ private void AddForce(Vector3 force){
 // this will call the set attack function of sword
 
 private void setDamageWeapon(){
+ // this is for the sword therefore we can use it to handle the damage and the knockback
  if(currentWeapon.WeaponCollider.TryGetComponent<Sword>(out Sword sword)){
-    sword.SetAttack(currentWeapon.Damage);
+    sword.SetAttack(currentWeapon.Damage,ComboCurrent.Knockback);
  }
   
 }
 
 
 
-       private void OnDodge(){
+  private void OnDodge(){
         
-         stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+         // we only dodge if the movments is not zero
+         if(stateMachine.InputReader.MovementValue != Vector2.zero){
+           stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+         }
+         
         
     }
 
-
-        private void OnRoll()
+  private void OnRollTarget()
     {
-       stateMachine.SwitchState(new PlayerRollstate(stateMachine,stateMachine.currentMovement));
+      // we only roll if we the inputs are not zero
+         if(stateMachine.InputReader.MovementValue != Vector2.zero){
+            stateMachine.SwitchState(new PlayerRollTargetState(stateMachine, stateMachine.InputReader.MovementValue));
+         }
+          
     }
 
-       private void OnJump(){
+  private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 

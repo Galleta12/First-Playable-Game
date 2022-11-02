@@ -1,23 +1,8 @@
-20 of October things to do for the next 3 to 4 days
-// I dont like at all the draw method
-// I will get rid of it,
-the target has been improved
-if you press tab multiple times you can change target to the closest one
-now I will work on the selection of target with inputs while pressing
-the target button
-// the target has been improved
-// next step is to dont allow movement when pressing the movement values in order to select a new target
-// I will do this tomorrow, maybe create a new child class, that will only instiate, when I want to create
-a new target movement
-
-do the knockback
-move the knockback depending on what direction was hit
-do the new draw method, for controller and keyboard
-Scriptable objets?
-do the new ground roll state. However, do it similar to the, dodge state
-// do the ui
-Allow air attack depending on the numbers of hits.
-Allow attack after dashing
-// do the weapon system
-// do the particles and sound effects
-// improve the target system by making it more precise or with a button to select new target
+1 of November
+// the attack and the inventory has been improved
+// the controller inputs is working, however it seams that my controller is broke
+To do
+the knockback need to be improved, add gravity and understand more the direction
+do the attack of the air ComboS
+finally do the particles, after this I will work slowly on the
+sound and the HUD

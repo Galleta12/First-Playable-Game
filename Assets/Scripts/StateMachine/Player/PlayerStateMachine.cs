@@ -121,13 +121,13 @@ public bool IsTargeting{get{return isTargeting;}set{isTargeting=value;}}
 
 private void Start() {
     //set up the delegate for the move
-     moveDelegate = Move;
+    moveDelegate = Move;
      
-     setupJumpVariable();
+    setupJumpVariable();
     
     MainCameraPlayer = Camera.main.transform;
     // suscribe to an event of the dash
-     InputReader.DashEvent += OnDash;
+    InputReader.DashEvent += OnDash;
 
     SwitchState(new PlayerGroundState(this));
      

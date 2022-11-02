@@ -112,7 +112,7 @@ public class PlayerGroundState : PlayerBaseState
 
     private void checkChanges(){
      
-      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
+      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null && stateMachine.Weapon.IsSword){
      
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine,0));
         return;

@@ -13,7 +13,7 @@ public class PlayerSelectTargetState : PlayerTargetState, IPlayerSelectTargetInt
     
     public PlayerSelectTargetState(PlayerStateMachine stateMachine, bool shouldChangeTarget) : base(stateMachine, shouldChangeTarget)
     {
-        Debug.Log("Selection of new target with inputs is being call");
+        //Debug.Log("Selection of new target with inputs is being call");
         this.height = new Vector3(stateMachine.transform.position.x, stateMachine.transform.position.y + 
         stateMachine.Controller.height, stateMachine.transform.position.z);
         this.center = new Vector3(stateMachine.transform.position.x, stateMachine.transform.position.y + 
@@ -83,7 +83,7 @@ public class PlayerSelectTargetState : PlayerTargetState, IPlayerSelectTargetInt
        }
     }
 
-
+   // create a ray based on the inputs 
       public Ray[] CreateRay(Vector3 inputs)
     {
       Ray [] ray = new Ray[2];

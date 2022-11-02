@@ -82,6 +82,7 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
        if(!context.performed){return;}
        RollEvent?.Invoke();
+     
     }
 
     public void OnDrawWeapon(InputAction.CallbackContext context)
@@ -105,7 +106,7 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     public void OnTarget(InputAction.CallbackContext context)
     {
        if(!context.performed){return;}
-         Debug.Log("This is for the target event trigger");
+       
        TargetEvent?.Invoke();
     }
 
@@ -125,11 +126,11 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
     {
         
          if(context.performed){
-            Debug.Log("This is for the target");
+          
             isTargeting = true;
         }else if(!context.performed){
             isTargeting =false;
-             Debug.Log("This is for the target false");
+          
         }
     }
 }

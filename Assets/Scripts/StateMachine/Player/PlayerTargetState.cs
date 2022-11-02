@@ -67,7 +67,8 @@ public class PlayerTargetState : PlayerBaseState
       
       
       
-      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null){
+      if(stateMachine.InputReader.isAttacking && stateMachine.Weapon.selectedWeapon.WeaponObject != null
+      && stateMachine.Weapon.IsSword){
      
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine,0));
         return;
@@ -174,7 +175,10 @@ public class PlayerTargetState : PlayerBaseState
 
        private void OnDodge(){
         
-         stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+         // we only dodge if the movments is not zero
+         if(stateMachine.InputReader.MovementValue != Vector2.zero){
+           stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+         }
         
     }
 
@@ -189,13 +193,16 @@ public class PlayerTargetState : PlayerBaseState
 
       private void OnRollTarget()
     {
-       if(stateMachine.coolDownTimeRoll <=0f){
-          stateMachine.SwitchState(new PlayerRollTargetState(stateMachine, stateMachine.InputReader.MovementValue));
-        }
+      // we only roll if we the inputs are not zero
+         if(stateMachine.InputReader.MovementValue != Vector2.zero){
+            stateMachine.SwitchState(new PlayerRollTargetState(stateMachine, stateMachine.InputReader.MovementValue));
+         }
+         
+        
     }
 
 
-           private void OnJump(){
+    private void OnJump(){
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 

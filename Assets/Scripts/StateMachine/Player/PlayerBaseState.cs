@@ -24,35 +24,6 @@ public abstract class PlayerBaseState : State
 
 
 
-// public void UpdateStates(){
-//    Tick(Time.deltaTime);
-//    if(currentSubState != null){
-//     currentSubState.UpdateStates();
-//    }
-
-// }
-
-
-// protected void SwitchState(PlayerBaseState newState){
-//    Exit();
-//    newState.Enter();
-//    if(isRootState){
-//      CurrentState.currentstate = newState;
-//    } else if(currentSuperState !=null){
-//     currentSuperState.SetSubState(newState);
-//    }
-  
-   
-// }
-
-// protected void SetSuperState(PlayerBaseState newSuperState){
-//  currentSuperState = newSuperState;
-// }
-
-// protected void SetSubState(PlayerBaseState newSubState){
-//  currentSubState = newSubState;
-//  newSubState.SetSuperState(this);
-// }
 
 // calculate the movement regarding the mouse and the inputs
 protected Vector3 CalculateNormalMovement(){
@@ -72,15 +43,6 @@ protected Vector3 CalculateNormalMovement(){
 
  
 
-
-
-
-
-// protected void Move(Vector3 motion,float deltaTime){
-//   stateMachine.Controller.Move((motion + stateMachine.ForceReceiver.Movement) * deltaTime);
-
-
-// }
 
 // rotate the chracter
 protected void FaceLookMouse( Vector3 direction,float deltaTime){
@@ -137,11 +99,17 @@ protected void handleCoolDownRoll(float deltaTime){
 
 protected void OnDraw(){
   
-  if(stateMachine.InputReader.MovementValue == Vector2.zero && stateMachine.Controller.isGrounded){
-     stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
-  }else{
-    stateMachine.SwitchState(new PlayerDrawMovement(stateMachine, stateMachine.InputReader.KeyBoardNumberInt, stateMachine.InputReader.DeviceName));
-  }
+ // we are passing the number int
+ // we also check if the button is a keyboard or a controller
+ //since it will be handle it different depending if it is a controller or not
+ if(stateMachine.InputReader.DeviceName == "Keyboard"){
+    stateMachine.SwitchState(new PlayerDrawWeapons(stateMachine, stateMachine.InputReader.KeyBoardNumberInt));
+ }
+ else{
+  stateMachine.SwitchState(new PlayerDrawControllerWeaponState(stateMachine));
+ }
+ 
+  
  
 }
 
