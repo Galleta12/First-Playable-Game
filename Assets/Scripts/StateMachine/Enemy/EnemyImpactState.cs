@@ -54,7 +54,7 @@ public class EnemyImpactState : EnemyBaseState
     }
 
     private void MoveImpact(float deltatime){
-        enemystateMachine.Controller.Move((impact) * deltatime);
+        enemystateMachine.Controller.Move((impact + enemystateMachine.Movement) * deltatime);
 
     }
 

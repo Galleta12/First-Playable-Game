@@ -41,7 +41,8 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
 
     public event Action CancelTargetEvent;
 
-
+    //action for the attack air 
+    public event Action AirAttackEvent;
 
 
        private void Start()
@@ -132,5 +133,12 @@ public class InputReader : MonoBehaviour,Controls.IPlayerActions
             isTargeting =false;
           
         }
+    }
+    //this is for the attack on the air
+    // it checks if two buttons are pressed at the same time, with the option one modifier on the new input system of unity
+    public void OnAttackAir(InputAction.CallbackContext context)
+    {
+       if(!context.performed){return;}
+       AirAttackEvent?.Invoke();
     }
 }

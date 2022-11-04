@@ -24,7 +24,9 @@ public event Action OnDeath;
 
 public bool isDead => currentHealth == 0;
 
+private int CounterHit;
 
+public int counterHit{get{return CounterHit;}set{value = CounterHit;}}
 
 
 private void Start() {
@@ -57,6 +59,8 @@ public void DealDamage(int damage,Vector3 directionKnockback){
     //trigger the on take damage action and on death action for the enemy state machine
     //first we get the direction
     OnTakeDamage?.Invoke(directionKnockback);
+    //count how many times it was hit
+    CounterHit++;
     if(currentHealth == 0){
       OnDeath?.Invoke();
     }

@@ -74,7 +74,7 @@ public class PlayerTargetState : PlayerBaseState
         return;
         
       }
-     
+     //if the current target is null we want to set the closest target
       if(stateMachine.Targeters.currentTarget == null){
          stateMachine.Targeters.setTheClosestTarget();
          //here I need to do a courotine in order to check if the targets is null;
@@ -128,14 +128,57 @@ public class PlayerTargetState : PlayerBaseState
 
 
   
-
+//calculate the movemnt for the target
+// relative to the camera
     private Vector3 CalculateTargetMovement(){
-       Vector3 movement = new Vector3();
+
+    
+
+      
+      Vector3 movement = new Vector3();
+      
        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
 
        return movement;
 
+    }
+
+    private float[] newinputsRelativeCamera(){
+          float[] inputs = new float[2];      
+          float[] newinputs = new float[2];      
+          float[] lastTrackinputs = new float[2];      
+          
+      Vector3 cameraForward = stateMachine.MainCameraPlayer.forward;
+      Vector3 cameraRight = stateMachine.MainCameraPlayer.right;       
+      cameraForward.y = 0f;
+      cameraRight.y = 0f;
+      cameraForward.Normalize();
+      cameraRight.Normalize();
+     //1 is parallel
+     //0 is perpendicular
+     // -1 is opposite 
+     //Vector3 toPlayer = (stateMachine.transform.position-cameraForward).normalized;
+     float playerPOSRelativeCamera = Vector3.Dot(stateMachine.transform.forward,cameraForward);
+     
+        // detect if the player position is parallel to the camera
+        if(playerPOSRelativeCamera <=1 && playerPOSRelativeCamera > 0){
+            Debug.Log("front");
+            newinputs[0]= stateMachine.InputReader.MovementValue.y;            
+            newinputs[1]= stateMachine.InputReader.MovementValue.x;            
+        }//if not paralle it would mean that is opposite (front);
+        else if(playerPOSRelativeCamera <=0){
+            Debug.Log("back");
+            newinputs[0]= -(stateMachine.InputReader.MovementValue.y);            
+            newinputs[1]= -(stateMachine.InputReader.MovementValue.x);            
+          
+        }
+       
+         
+     
+
+         
+         return newinputs;
     }
 
 

@@ -19,9 +19,19 @@ public class PlayerAttackingState : PlayerBaseState
 
 
     private Target currentTargetAttack;
+
+    private bool IsAirAttack = false;
+
+    private float jumpForAttack;
+
+    //to check if it is 3, so we can perform the jump
+    private int indForAttackAir;
+    
     public PlayerAttackingState(PlayerStateMachine stateMachine, int comboIdx) : base(stateMachine)
     {
         
+       
+       
        //this is the way of how we can get the current data of the combo
        this.ComboCurrent = stateMachine.Weapon.selectedWeapon.ComboState[comboIdx];
        // we also want to get the current selected weapon
@@ -29,6 +39,7 @@ public class PlayerAttackingState : PlayerBaseState
         
         this.currentTargetAttack = stateMachine.Targeters.currentTarget;
         
+        this.indForAttackAir = comboIdx;
     }
 
     public override void Enter()
@@ -44,7 +55,9 @@ public class PlayerAttackingState : PlayerBaseState
          stateMachine.InputReader.DodgeEvent += OnDodge;
 
           stateMachine.InputReader.RollEvent += OnRollTarget;
-
+         
+         //for the air Attack
+         stateMachine.InputReader.AirAttackEvent += OnAirAttack;
        
     }
 
@@ -70,7 +83,7 @@ public class PlayerAttackingState : PlayerBaseState
         //move the character taking into count the impulse force
         MoveAttack(deltaTime);  
         
-        float normalizedTime = GetNormalizedTime(stateMachine.Animator);
+        float normalizedTime = GetNormalizedTime(stateMachine.Animator,"Attack");
         // this means that we are on an animation if is greater than 1 we are not doing nothing therefore we can change the state
         // we can change to the ground state
          // if the normal time is less than 1, it means that we are on an animation state
@@ -111,6 +124,9 @@ public class PlayerAttackingState : PlayerBaseState
         stateMachine.InputReader.RollEvent -= OnRollTarget;
 
         stateMachine.InputReader.JumpEvent -= OnJump;
+
+         stateMachine.InputReader.AirAttackEvent -= OnAirAttack;
+
     }
     public override void IntiliazeSubState()
     {
@@ -125,7 +141,19 @@ public class PlayerAttackingState : PlayerBaseState
         // is the setted attack time is greater than the normalized time, therefore we are still performing an attack
         if(ComboCurrent.ComboAttackTime > normalizedTime){return;}
         
-        // if we don't satisfy the first two condition we can move
+        
+        
+        //condition to know if we want the air attack
+        //we are passing 3 since is the index for the attacking state
+        if(IsAirAttack){
+          stateMachine.SwitchState(
+            new PlayerAttackingState(
+              stateMachine,
+              3
+            )
+          );          
+        }else{
+        // if we don't satisfy the first three condition we can move
         // to the next comboAttack
         stateMachine.SwitchState(
           new PlayerAttackingState(
@@ -133,6 +161,8 @@ public class PlayerAttackingState : PlayerBaseState
             ComboCurrent.ComboNextStateIndex
           )
         );
+
+        }
     }
 
 
@@ -144,6 +174,12 @@ public class PlayerAttackingState : PlayerBaseState
         AddForce(stateMachine.transform.forward * ComboCurrent.Force);
         // if its added we can set it to true
         alreadyAppliedForce = true;
+      // if we are on a correct attack time of the animation for the air and
+      // we are on the index of animation we can set up the variable for the jump
+      if(indForAttackAir==3){
+          stateMachine.verticalVelocity = stateMachine.intialJumpVelocity * 0.35f;
+       }
+
     }
 
 
@@ -200,10 +236,16 @@ private void setDamageWeapon(){
     Quaternion.LookRotation(direction),
     deltaTime * stateMachine.RotationDampSpeed
     );
-
+  
+  
 
 }
 
+private void OnAirAttack(){
+  IsAirAttack=true;
+
+  
+}
 
 
 

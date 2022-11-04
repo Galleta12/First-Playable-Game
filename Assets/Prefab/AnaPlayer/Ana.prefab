@@ -7682,6 +7682,7 @@ MonoBehaviour:
   <RollTargetForce>k__BackingField: 2
   <RollTargetStationaryForce>k__BackingField: 2
   <RollTargetTime>k__BackingField: 0.5
+  <DashAttackTime>k__BackingField: 0
   <drag>k__BackingField: 0.3
   currentMovement: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
@@ -7726,6 +7727,13 @@ MonoBehaviour:
       <ForceTime>k__BackingField: 0.35
       <Force>k__BackingField: 5
       <Knockback>k__BackingField: 0
+    - <AnimationNameCombo>k__BackingField: AttackJump
+      <TransitionDuration>k__BackingField: 0.5
+      <ComboNextStateIndex>k__BackingField: -1
+      <ComboAttackTime>k__BackingField: 0.8
+      <ForceTime>k__BackingField: 0.35
+      <Force>k__BackingField: 10
+      <Knockback>k__BackingField: 8
   - <WeaponName>k__BackingField: Pistol
     <WeaponAnimationDrawName>k__BackingField: 
     <WeaponAnimationDrawNameMovement>k__BackingField: 

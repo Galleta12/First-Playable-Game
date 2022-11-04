@@ -1,8 +1,9 @@
-1 of November
-// the attack and the inventory has been improved
-// the controller inputs is working, however it seams that my controller is broke
-To do
-the knockback need to be improved, add gravity and understand more the direction
-do the attack of the air ComboS
-finally do the particles, after this I will work slowly on the
-sound and the HUD
+3 of November
+//the target camera has been improved with the addition of state driven with
+// cinemachine
+// the knockback and the air attack is working correctly
+// there was a problem with the dash attack, need to work more on it
+// however until know the basic movemnts are Done
+// the next step is to do the particles and HUD
+// and the pistol movemnts. I will do that later on
+// I will now start working on the ai for the enemies

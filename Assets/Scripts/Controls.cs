@@ -125,6 +125,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.3)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackAir"",
+                    ""type"": ""Value"",
+                    ""id"": ""07fb1c30-b0b3-4b00-b21f-d5b2d9f44ebe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -435,6 +444,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""TargetSelectorPlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""ee19f402-41f7-4365-832d-d4364e2291cb"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackAir"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""5b25a46b-3b1b-400b-9c46-bab382a05620"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""AttackAir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a9b68805-c000-4d65-acd3-2ebf971f0588"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""AttackAir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -482,6 +524,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_OnCancelTarget = m_Player.FindAction("OnCancelTarget", throwIfNotFound: true);
         m_Player_TargetSelectorPlayer = m_Player.FindAction("TargetSelectorPlayer", throwIfNotFound: true);
+        m_Player_AttackAir = m_Player.FindAction("AttackAir", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -552,6 +595,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_OnCancelTarget;
     private readonly InputAction m_Player_TargetSelectorPlayer;
+    private readonly InputAction m_Player_AttackAir;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -567,6 +611,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @OnCancelTarget => m_Wrapper.m_Player_OnCancelTarget;
         public InputAction @TargetSelectorPlayer => m_Wrapper.m_Player_TargetSelectorPlayer;
+        public InputAction @AttackAir => m_Wrapper.m_Player_AttackAir;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -609,6 +654,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @TargetSelectorPlayer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
                 @TargetSelectorPlayer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
                 @TargetSelectorPlayer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelectorPlayer;
+                @AttackAir.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackAir;
+                @AttackAir.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackAir;
+                @AttackAir.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackAir;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -646,6 +694,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @TargetSelectorPlayer.started += instance.OnTargetSelectorPlayer;
                 @TargetSelectorPlayer.performed += instance.OnTargetSelectorPlayer;
                 @TargetSelectorPlayer.canceled += instance.OnTargetSelectorPlayer;
+                @AttackAir.started += instance.OnAttackAir;
+                @AttackAir.performed += instance.OnAttackAir;
+                @AttackAir.canceled += instance.OnAttackAir;
             }
         }
     }
@@ -681,5 +732,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnOnCancelTarget(InputAction.CallbackContext context);
         void OnTargetSelectorPlayer(InputAction.CallbackContext context);
+        void OnAttackAir(InputAction.CallbackContext context);
     }
 }

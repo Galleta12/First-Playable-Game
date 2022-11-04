@@ -19,7 +19,7 @@ public abstract class State
   public abstract void IntiliazeSubState();
 // function locally defined
 // check how far from an animation we are
-protected float GetNormalizedTime(Animator animator){
+protected float GetNormalizedTime(Animator animator, string animationName){
 
   //animator annonying you can be on multiple states
   //this will help us to check on which animator we are
@@ -30,9 +30,9 @@ protected float GetNormalizedTime(Animator animator){
 
    // if the animator is on trasition and the tag is Attack
    //this means we are not on trasition, therefore we are on our current state
-    if(animator.IsInTransition(0) && nextAnimator.IsTag("Attack")){
+    if(animator.IsInTransition(0) && nextAnimator.IsTag(animationName)){
             return nextAnimator.normalizedTime;
-        }else if(!animator.IsInTransition(0) && currentAnimator.IsTag("Attack")){
+        }else if(!animator.IsInTransition(0) && currentAnimator.IsTag(animationName)){
             return currentAnimator.normalizedTime;
         }else{
             return 0f;

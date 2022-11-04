@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "Hold(duration=0.3)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AttackAir",
+                    "type": "Value",
+                    "id": "07fb1c30-b0b3-4b00-b21f-d5b2d9f44ebe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -413,6 +422,39 @@
                     "action": "TargetSelectorPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "ee19f402-41f7-4365-832d-d4364e2291cb",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackAir",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "5b25a46b-3b1b-400b-9c46-bab382a05620",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "AttackAir",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "a9b68805-c000-4d65-acd3-2ebf971f0588",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "AttackAir",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
