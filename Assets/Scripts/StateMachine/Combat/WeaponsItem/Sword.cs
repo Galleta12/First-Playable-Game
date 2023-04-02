@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-   [field: SerializeField] public Rigidbody RB {get; private set;}
+[field: SerializeField] public Rigidbody RB {get; private set;}
 
 
 [field: SerializeField] public Collider   mycharacterController {get; private set;}

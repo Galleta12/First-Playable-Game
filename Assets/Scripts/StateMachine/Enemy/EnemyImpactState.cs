@@ -5,6 +5,14 @@ using UnityEngine;
 public class EnemyImpactState : EnemyBaseState
 {
     
+    
+    //animator variables
+    
+    private readonly int ImpactHash = Animator.StringToHash("BruteImpact");
+    private const float CrossFadeDuration = 0.1f;
+    
+    
+    //--------------------------------------------
     private Vector3 currentKnockback;
     private Vector3 impact;
 
@@ -18,11 +26,16 @@ public class EnemyImpactState : EnemyBaseState
         //this is the direction for the knockback
         this.currentKnockback = directionknockback;
     }
-
+    
     public override void Enter()
     {
+        
+        
+        //enemystateMachine.Animator.CrossFadeInFixedTime(ImpactHash,CrossFadeDuration);
         //we set the vector for the force impact
         AddForceImpact(currentKnockback);
+
+
     }
 
     public override void Tick(float deltaTime)
